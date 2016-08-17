@@ -1,4 +1,4 @@
-#AngularJS Modular Demo
+#AngularJS NAR Ad generator
 Demonstrates Angular modularity, testing, Gulp task automation, and more.
 
 [![Build Status](https://travis-ci.org/johnpapa/ng-demos.svg?branch=master)](https://travis-ci.org/johnpapa/ng-demos)
@@ -7,11 +7,11 @@ Demonstrates Angular modularity, testing, Gulp task automation, and more.
 
 >*Opinionated AngularJS style guide for teams by [@john_papa](//twitter.com/john_papa)*
 
->More details about the styles and patterns used in this app can be found in my [AngularJS Style Guide](https://github.com/johnpapa/angularjs-styleguide) and my **AngularJS Patterns: Clean Code**(coming soon) course at [Pluralsight](http://pluralsight.com/training/Authors/Details/john-papa) and working in teams. 
+>More details about the styles and patterns used in this app can be found in my [AngularJS Style Guide](https://github.com/johnpapa/angularjs-styleguide) and my **AngularJS Patterns: Clean Code**(coming soon) course at [Pluralsight](http://pluralsight.com/training/Authors/Details/john-papa) and working in teams.
 
 ## Structure
 	/build 	(created on the fly)
-	/gulp	
+	/gulp
 	/src
 		/client
 			/app
@@ -20,7 +20,7 @@ Demonstrates Angular modularity, testing, Gulp task automation, and more.
 		/server
 			/data
 			/routes
-	
+
 ## Requirements
 
 - Install Node
@@ -76,64 +76,20 @@ Type `gulp test` to run the tests including both unit and midway tests (spins up
 
 Testing uses karma, mocha, chai, sinon, ngMidwayTester libraries.
 
-## How It Works
-The app is quite simple and has 2 main routes:
-- dashboard
-- avengers list
-
-### The Modules
-The app has 4 feature modules and depends on a series of external modules and custom but cross-app modules
-
-```
-app --> [
-        app.avengers,
-        app.dashboard,
-        app.layout,
-        app.widgets,
-		app.core --> [
-			ngAnimate,
-			ngRoute,
-			ngSanitize,
-			blocks.exception,
-			blocks.logger,
-			blocks.router
-		]
-    ]
-```
-
-## core Module
-Core modules are ones that are shared throughout the entire application and may be customized for the specific application. Example might be common data services.
-
-This is an aggregator of modules that the application will need. The `core` module takes the blocks, common, and Angular sub-modules as dependencies. 
-
-## blocks Modules
-Block modules are reusable blocks of code that can be used across projects simply by including them as dependencies.
-
-### blocks.logger Module
-The `blocks.logger` module handles logging across the Angular app.
-
-### blocks.exception Module
-The `blocks.exception` module handles exceptions across the Angular app.
-
-It depends on the `blocks.logger` module, because the implementation logs the exceptions.
-
-### blocks.router Module
-The `blocks.router` module contains a routing helper module that assists in adding routes to the $routeProvider.
-
 ## node-inspector
 
 ### Quick Start
 1. Install globally
     `npm install -g node-inspector`
-    
+
 2. Run server, load it in the browser
     `node-debug server/server.js`
-    
+
     This loads http://localhost:8080/debug?port-5858 with the node code in the Chrome debugger
 
 ### Manually Run in One Terminal Tab
 Run the server with options, and debug
-    
+
 `node --debug=5858 server/server.js & node-inspector`    
 
 Or
@@ -143,7 +99,7 @@ Or
  - Note: Debug defaults to 5858
 
 ### Manual Run and Break on First Line
-Run the server and have it break on the first line of code 
+Run the server and have it break on the first line of code
     `node-inspector & node --debug-brk server/server.js`
 
 ### Run in its own Tab
@@ -159,7 +115,7 @@ gulp.src('', {read: false})
 
 Run `gulp serve-dev-debug` or `gulp serve-dev-debug-brk` to debug node via the Gulp tasks in this project.
 
-### Issues 
+### Issues
 
 ####If a process stays connected find it and kill with these commands
 
@@ -188,4 +144,3 @@ CTRL-X and save
 Source the file
 
     source ~/.bash_profile
-
