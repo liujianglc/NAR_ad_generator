@@ -1,0 +1,88 @@
+<div>
+    <form novalidate ng-submit="do_register()" name="signUpForm">
+        <div class="" style="font-size:20px;font-weight:600;text-align:center;"><b>New Customer</b>
+        </div>
+        <p>If you are not yet customer, please complete the registration form below to create a New Account.</p>
+        <br>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group " ng-class="{ 'has-feedback has-error': signUpForm.firstName.$invalid && signUpForm.firstName.$touched }" >
+                    <label for="First name">First name
+                        <strong>*</strong>
+                    </label>
+                    <input type="text" id="register_firstName" ng-model="signup.firstName" placeholder="" value="" name="firstName" class="form-control" data-tip="First Name" required>
+                    <span class="glyphicon form-control-feedback" ng-class="{ ' glyphicon-warning-sign': signUpForm.firstName.$invalid  && signUpForm.firstName.$touched}"></span>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group has-feedback " ng-class="{ 'has-feedback has-error': signUpForm.lastName.$invalid && signUpForm.lastName.$touched }">
+                    <label for="Last name">Last name
+                        <strong>*</strong>
+                    </label>
+                    <input type="text" id="register_lastName" placeholder="" value="" ng-model="signup.lastName" name="lastName" class="form-control" data-tip="Last Name" required>
+                    <span class="glyphicon form-control-feedback" ng-class="{ ' glyphicon-warning-sign': signUpForm.lastName.$invalid  && signUpForm.lastName.$touched}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-7">
+                <div class="form-group">
+                    <label for="Company Name">Company Name</label>
+                    <input type="text" class="form-control" id="register_companyName" name="register_companyName" placeholder="">
+                </div>
+            </div>
+            <div class="col-xs-5">
+                <div class="form-group has-feedback" ng-class="{ 'has-feedback has-error': signUpForm.phone.$invalid && signUpForm.phone.$touched }">
+                    <label for="Phone">Phone
+                        <strong>*</strong>
+                    </label>
+                    <input type="text" class="form-control" ng-model="signup.phone" name="phone" id="register_phone" placeholder="" required>
+                    <span class="glyphicon form-control-feedback" ng-class="{ ' glyphicon-warning-sign': signUpForm.phone.$invalid  && signUpForm.phone.$touched}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="Address *">Street Address
+                        <strong>*</strong>
+                    </label>
+                    <google-address-input></google-address-input>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="Address2">Ste, Apt, Bld, Floor, ATTN...</label>
+                    <input type="text" class="form-control" placeholder="Additional Address Info" name="address2" id="address2" value="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group has-feedback" ng-class="{ 'has-feedback has-error': signUpForm.email.$invalid && signUpForm.email.$touched }">
+                    <label for="Town/City">Email Address (Account Login)*</label>
+                    <input type="email" class="form-control" ng-model="signup.email" name="email" id="register_email" required="">
+                    <span class="glyphicon form-control-feedback" ng-class="{ ' glyphicon-warning-sign': signUpForm.email.$invalid  && signUpForm.email.$touched}"></span>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="form-group  has-feedback" ng-class="{ 'has-feedback has-error': signUpForm.password.$invalid && signUpForm.password.$touched }">
+                    <label for="Country">Password
+                        <strong>*</strong>
+                    </label>
+                    <input type="password" class="form-control" ng-model="signup.password" name="password" id="register_password" required="">
+                    <span class="glyphicon form-control-feedback" ng-class="{ ' glyphicon-warning-sign': signUpForm.password.$invalid  && signUpForm.password.$touched}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8">
+                <button type="submit" class="btn btn-primary" ng-disabled="signUpForm.$invalid">Create New Account</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" ng-controller="MainCtrl">
+
+<head>
+  <meta charset="utf-8" />
+  <title>NAR AD GENERATOR</title>
+  <meta name="description" content="angular-kickstart - speed up your AngularJS development and testing with a great gulpjs build system.
+">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title ng-bind="title"></title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="keywords" content="AngularJS, angular-kickstart, gulp, bower, vesparny" />
+
+  <!-- build:css assets/css/main.css -->
+  <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/src/client/content/css/main.css">
+  <!-- endbuild -->
+  <style>
+  .ng-hide:not(.ng-hide-animate)
+  {
+      display: none !important;
+  }
+  </style>
+</head>
+
+<body>
+  <base href="/"/>
+  <div class="wrapper">
+    <header ui-view="header"></header>
+    <div ui-view class="container "></div>
+    <footer ui-view="footer"></footer>
+  </div>
+
+  <!-- build:js assets/js/vendor.js -->
+
+  <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+  <script type="text/javascript" src="/bower_components/angular/angular.js"></script>
+  <script type="text/javascript" src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <!-- endbuild -->
+
+  <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- build:js assets/js/main.js -->
+  <script type="text/javascript" src="/src/client/app/app.js"></script>
+
+  <script type="text/javascript" src="/src/client/app/core/home/home.js"></script>
+  <script type="text/javascript" src="/src/client/app/core/login/login.js"></script>
+  <script type="text/javascript" src="/src/client/app/core/cart/cart.js"></script>
+  <script type="text/javascript" src="/src/client/app/core/myaccount/myaccount.js"></script>
+  <script type="text/javascript" src="/src/client/app/core/select-print/select-print.js"></script>
+  <script type="text/javascript" src="/src/client/app/core/select-broadcast/select-broadcast.js"></script>
+  <script type="text/javascript" src="/src/client/app/core/select-online/select-online.js"></script>
+
+  <script type="text/javascript" src="/src/client/app/common/directives/login.js"></script>
+  <script type="text/javascript" src="/src/client/app/common/directives/register.js"></script>
+  <script type="text/javascript" src="/src/client/app/common/interceptors/httpInterceptor.js"></script>
+  <script type="text/javascript" src="/src/client/app/common/services/dataService.js"></script>
+  <script type="text/javascript" src="/src/client/app/common/filters/uppercase.js"></script>
+
+  <script type="text/javascript" src="/src/client/app/common/header.js"></script>
+  <script type="text/javascript" src="/src/client/app/common/footer.js"></script> 
+
+  <!-- endbuild -->
+</body>
+
+</html>

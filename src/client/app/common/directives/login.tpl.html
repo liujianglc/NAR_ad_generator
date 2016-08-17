@@ -1,0 +1,59 @@
+<div>
+    <div class="up-details">
+        <div class="" style="font-size:20px;font-weight:600;text-align:center;">Returning Customer</div>
+        <p>If you are currently a LowPricePrint.com customer, please login using your email address and password. Once you're logged in, use the navigation buttons to place orders, create custom Price Quotes, and more.</p>
+        <br>
+        <form novalidate name="loginForm" ng-submit="do_login()">
+	        <div class="row">
+	            <div class="col-sm-7">
+	                <div  class="form-group" ng-class="{ 'has-feedback has-error': loginForm.email.$invalid && loginForm.email.$touched }" >
+	                    <label for="Town/City">Email Address (Account Login)*</label>
+	                    <input type="email" class="form-control" name="email" ng-model="user.email" required>
+	                    <span class="glyphicon form-control-feedback" ng-class="{ ' glyphicon-warning-sign': loginForm.email.$invalid  && loginForm.email.$touched}"></span>
+	                </div>
+	            </div>
+	            <div class="col-sm-5">
+	                <div class="form-group" ng-class="{ 'has-feedback has-error': loginForm.password.$invalid && loginForm.password.$touched }">
+	                    <label for="Country">Password
+	                        <strong>*</strong>
+	                    </label>
+	                    <input type="password" class="form-control" name="password" ng-model="user.password" required ng-minlength="6" >
+	                    <span class="glyphicon form-control-feedback" ng-class="{ ' glyphicon-warning-sign': loginForm.password.$invalid && loginForm.password.$touched }"></span>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="row">
+	            <div class="col-xs-7">
+	                <label class="checkbox-inline">
+	                    <input type="checkbox" ng-model="remember" value="1">Remember Me
+	                </label>
+	            </div>
+	            <div class="col-xs-5">
+	                <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid">Account Login</button>
+	            </div>
+	        </div>
+        </form>
+        <br>
+        <hr>
+        <p>If you are an existing customer and have forgotten your password, please enter your email address and click “Reset Password”. You will receive an email with a temporary login password</p>
+        <br>
+        <form name="forgotFasswordForm" novalidate ng-submit="do_forgot_password()">
+	        <div class="row">
+	            <div class="col-xs-8">
+	                <div class="form-group " ng-class="{ 'has-feedback has-error': forgotFasswordForm.email.$invalid && forgotFasswordForm.email.$touched }">
+	                    <label for="Town/City">Email Address (Account Login)*</label>
+	                    <input type="email" class="form-control" ng-model="forgot.email" placeholder="" name="email" id="email" required>
+	                    <span class="glyphicon  form-control-feedback"  ng-class="{ 'glyphicon-warning-sign': forgotFasswordForm.email.$invalid && forgotFasswordForm.email.$touched }"></span>
+	                </div>
+	            </div>
+	            <div class="col-xs-3">
+	                <br>
+	                <button type="submit" class="btn btn-primary" ng-disabled="forgotFasswordForm.$invalid">Reset Password</button>
+	            </div>
+	        </div>
+	        <div class="row">
+	            <div class="col-xs-2"></div>
+	        </div>
+        </form>
+    </div>
+</div>
