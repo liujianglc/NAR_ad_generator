@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$smarty.const.SITE_NAME}{if $smarty.const.PAGE_TITLE} | {$smarty.const.PAGE_TITLE}{/if}</title>
+<meta name="keywords" content="{$smarty.const.KEYWORDS}">
+<meta name="description" content="{$smarty.const.DESCRIPTION}">
+{if $smarty.const.SITE_ICON}<link rel="shortcut icon" href="{$smarty.const.BASE_URL}{$smarty.const.THEME_PATH}{$smarty.const.SITE_ICON}">{/if}
+<link rel="stylesheet" type="text/css" href="{$smarty.const.THEME_PATH}styles/main.css" />
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}js/misc.js"></script>
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}js/AC_RunActiveContent.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+
+{* TINYBROWSER *}
+<script language="javascript" type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}modules/tinybrowser/tb_standalone.js.php"></script>
+
+{* COLOR BOX *}
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}modules/colorbox/jquery.colorbox-min.js"></script>
+<link rel="stylesheet" type="text/css" href="{$smarty.const.THEME_COMMON_PATH}modules/colorbox/colorbox.css" />
+
+{literal}
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".lightBox").colorbox();
+	$(".lightBoxPreview").colorbox();/*{iframe:true, innerWidth:720, innerHeight:90}*/
+	$(".lightBoxPrint").colorbox({iframe:true, innerWidth:900, innerHeight:450});
+	$(".lightBoxAddToCart").colorbox({iframe:true, innerWidth:900, innerHeight:450});
+	$(".lightBoxVideo").colorbox({iframe:true, innerWidth:320, innerHeight:280});
+	$(".lightBoxAudio").colorbox({iframe:true, innerWidth:405, innerHeight:35});
+	$(".lightBoxAudioDownload").colorbox({iframe:true, innerWidth:900, innerHeight:440});
+	$(".lightBoxComment").colorbox({iframe:true, innerWidth:320, innerHeight:280});
+
+	//Example of preserving a JavaScript event for inline calls.
+	$("#click").click(function(){
+		$('#click').css({"background-color":"#096", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
+		return false;
+	});
+});
+</script>
+{/literal}
+</head>

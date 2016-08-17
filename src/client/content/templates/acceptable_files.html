@@ -1,0 +1,42 @@
+{if $contentOnly}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$smarty.const.SITE_NAME}{if $smarty.const.PAGE_TITLE} | {$smarty.const.PAGE_TITLE}{/if}</title>
+<meta name="keywords" content="{$smarty.const.KEYWORDS}">
+<meta name="description" content="{$smarty.const.DESCRIPTION}">
+    {if $smarty.const.SITE_ICON}
+<link rel="shortcut icon" href="{$smarty.const.BASE_URL}{$smarty.const.SITE_ICON}">
+    {/if}
+<link rel="stylesheet" type="text/css" href="{$smarty.const.THEME_PATH}styles/main.css" />
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}js/misc.js"></script>
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}js/AC_RunActiveContent.js"></script>
+    {literal}
+<style>
+body{ margin:0; padding:0; }
+</style>
+    {/literal}
+</head>
+<body>
+{/if}
+<div>
+    <div class="header">
+      <div class="headerBg">
+        <h1 class="left">{$smarty.const.PAGE_TITLE}</h1>
+        <div align="right">&nbsp;</div>
+        <div class="clear"></div>
+      </div>
+    </div>
+	<div class="generic_bg" style="padding-top:0;">
+	    {$data.content}
+        <div align="center">
+            <a href="{if !$contentOnly}{$smarty.const.MY_ACCOUNT_URL}{else}javascript: history.go(-1){/if}"><img src="/content/images/bttnBack.gif" alt="Back" border="0" /></a>
+        </div>
+    </div>
+    <div class="header">&nbsp;</div>
+</div>
+{if $contentOnly}
+</body>
+</html>
+{/if}

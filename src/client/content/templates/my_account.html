@@ -1,0 +1,208 @@
+{include file="`$smarty.const.THEME_COMMON`status.html"}
+<div id="MyAccount">
+	<div class="column1">
+        <div class="header">
+            <div class="headerBg">
+              <h1 class="left">{$smarty.const.PAGE_TITLE}</h1>
+              <div align="right"><a href="update_account.php"><img src="/content/images/bttnEdit.gif" alt="Edit" border="0" /></a></div>
+              <div class="clear"></div>
+            </div>
+        </div>
+        <div class="columnItemContent">
+            <div class="company">{$data.groupName}</div>
+            <div class="user">{$data.first} {$data.last}</div>
+            <div class="info1">
+                <p>{$data.email}<br />
+                {if $data.phone}ph: {$data.phone}<br />{/if}
+                {if $data.fax}fax: {$data.fax}<br />{/if}
+                </p>
+            </div>
+            <div class="info2">
+                <p>{$data.address}<br />
+                {if $data.address2}{$data.address2}<br />{/if}
+                {$data.city}, {$data.state} {$data.zip}<br />
+                {$data.country}</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="header">
+            <div class="headerBg">
+                <h1>Manage My Files</h1>
+            </div>
+        </div>
+        <div class="columnItemContent">
+        	<img src="/content/images/bttnPrintAd.gif" alt="My Print Ads" />
+            	<span class="count">
+                {if $pdfTotal < $maxPdf}
+	                {if $pdfTotal < 10 && $pdfTotal > 0}0{/if}
+                	{$pdfTotal}
+                {elseif $pdfTotal == $maxPdf}
+                	(Last {$maxPdf})
+                {/if}
+                </span><br />
+{assign var=count value=0}
+{if $pdfTotal == 0}
+            <p>Found 0 pdfs. Start creating your ads by clicking <a href="{$smarty.const.PRINT_URL}">here</a>.</p>
+{else}
+    
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    	<tr>
+          <td width="25" class="headerItem">&nbsp;</td>
+          <td class="headerItem" width="200">File Name</td>
+          <td width="120" class="headerItem">Date</td>
+          <td class="headerItem">Status</td>
+        </tr>
+    	<tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+    {foreach from=$pdf item=data}
+    	<tr>
+          <td align="right" valign="top"><span class="countItem">{$count+1}</span></td>
+          <td valign="top">{$data.campaignShortTitle} - {$data.title} {if $data.campaignExist}<a href="print_custom.php?pdfId={$data.pdfId}">Edit</a>{*if $data.approvalStatus == 1} - <a href="print_custom.php?pdfId={$data.pdfId}">Edit</a> {/if*}{/if}</td>
+          <td valign="top">{if $data.modified}{$data.modified}{else}{$data.created}{/if}</td>
+          <td valign="top">
+          {if $data.approvalStatus == 0}
+          	{if $data.pdfExist}
+          <a href="{$smarty.const.DOWNLOAD_URL}?pdfId={$data.pdfId}" target="_blank">Download{if $data.renderStatus == 1}<br />low res{/if}</a> {if $data.renderStatus == 1}<br />(high res will be available soon...){/if}
+          	{/if}
+          {elseif $data.approvalStatus == 1}
+          <a href="print_status.php?pdfId={$data.pdfId}" class="lightBoxComment" title="{$data.title} - declined">Declined</a>{elseif $data.approvalStatus == -1}<a href="print_status.php?pdfId={$data.pdfId}" class="lightBoxComment" title="{$data.title} - pending approval">Pending Approval</a>
+          {/if}
+          </td>
+        </tr>
+    	<tr height="5">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        {assign var=count value=$count+1}
+    {/foreach}
+    </table>
+{/if}
+	<br />
+	    	<img src="/content/images/bttnDownloads.gif" alt="Downloads" />
+            <span class="count">
+                {if $downloadTotal < $maxDownload}
+                	{if $downloadTotal < 10 && $downloadTotal > 0}0{/if}{$downloadTotal}
+                {elseif $downloadTotal == $maxDownload}
+                	(Last {$maxDownload})
+                {/if}
+			</span><br />
+{assign var=count value=0}
+{if $downloadTotal == 0}
+             <p>Found 0 downloads. Start downloading ads by clicking <a href="{$smarty.const.ONLINE_URL}">here</a>.</p>
+{else}
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    	<tr>
+          <td width="25" class="headerItem">&nbsp;</td>
+          <td class="headerItem" width="200">File Name</td>
+          <td width="120" class="headerItem">Date</td>
+          <td class="headerItem">&nbsp;</td>
+        </tr>
+    	<tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+    {foreach from=$download item=data}
+    	<tr>
+          <td align="right"><span class="countItem">{$count+1}</span></td>
+          <td>{$data.title}</td>
+          <td>{$data.created}</td>
+          <td><a href="{$smarty.const.DOWNLOAD_URL}?{if $data.table == '_cms_user_pdf'}pdfId{else}fileId{/if}={$data.fileId}" target="_blank">Download</a></td>
+        </tr>
+    	<tr height="5">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        {* PREVIEW *}
+		{* {if $data.table != '_cms_user_pdf'}<a href="{$smarty.const.PREVIEW_URL}?fileId={$data.fileId}" class="lightBox" title="{$data.title}{if $data.category} - {$data.category}{/if}">Preview</a> | {/if} *}
+        {assign var=count value=$count+1}
+    {/foreach}
+    </table>
+{/if}
+        </div>
+    	<div class="header">&nbsp;</div>
+    </div>
+	<div class="column2">
+    	<div class="header">
+           	<div class="headerBg">
+	            <h1>My Logos</h1>
+            </div>
+        </div>
+        <div class="columnItemContent">
+	{foreach from=$FileList item=file}
+    		<a href="{$file.path}" class="lightBox" title="{$file.name}" target="_blank">{$file.name}</a><br />
+    {/foreach}
+    		{if $FileList|@count > 0}
+            <br />&nbsp;
+            {/if}
+            <p><a href="#NULL" onclick="window.open('{$smarty.const.THEME_COMMON_PATH}modules/tinybrowser/upload.php?type=image&folder=', 'upload', 'width=800,height=425,scrollbars=yes');"><img src="/content/images/bttnUpload.gif" align="Upload New Logo" border="0" /></a></p>
+            <p>NAR guidelines only allow for state and local association logos to be uploaded. Print ads cannot be used for individual REALTOR<sup>&reg;</sup> promotion. <a href="http://www.realtor.org/pac.nsf/pages/UsageGuidelines" target="_blank">NAR Usage Guidelines</a></p>
+          	<p>Upload cmyk, or black PRINT logo: .eps, .ai, .psd, .jpeg format image.<br />
+            Upload rgb web logo: .jpeg, .png, or .gif format image.</p>
+            <p>Please note: The Ad Generator does not automatically convert color logos to black &amp; white. Please upload a black &amp; white logo if you plan to customize BW print ads.</p>
+            <p>Format image: what's the difference? <a href="{$smarty.const.ACCEPTABLE_FILE_URL}">CLICK HERE</a> for an explanation</p>
+            <p>The logo will be submitted for approval and added to your available logo list.<br />Please allow 5 working days for processing.</p>
+        </div>
+    	<div class="header">
+           	<div class="headerBg">
+	            <h1>My Invoices {if $invoiceTotal == $maxInvoice}(Last {$maxInvoice}){/if}</h1>
+			</div>
+        </div>
+      <div class="columnItemContent">
+        <img src="/content/images/bttnInvoices.gif" alt="Inovices" />
+        <span class="count">
+        {if $invoiceTotal < $maxInvoice}
+	        {if $invoiceTotal < 10 && $invoiceTotal > 0}0{/if}{$invoiceTotal}
+        {elseif $downloadTotal == $maxDownload}
+        	(Last {$invoiceTotal})
+        {/if}
+        </span><br />
+{assign var=count value=0}
+{if $invoiceTotal == 0}
+	<p>Found 0 invoices.</p>
+{else}
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    	<tr>
+          <td width="25" class="headerItem">&nbsp;</td>
+          <td class="headerItem" width="100">Invoice</td>
+          <td width="100" class="headerItem">Date</td>
+          <td class="headerItem">&nbsp;</td>
+        </tr>
+    	<tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        {foreach from=$invoice item=data}
+    	<tr>
+          <td align="right"><span class="countItem">{$count+1}</span></td>
+          <td>{$data.invoiceId}</td>
+          <td>{$data.created}</td>
+          <td><a href="invoice.php?invoiceId={$data.userInvoiceId}" class="lightBox" title="Invoice #{$data.invoiceId}">view</a></td>
+        </tr>
+    	<tr height="5">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        {assign var=count value=$count+1}
+        {/foreach}
+    </table>
+    </p>
+{/if}
+        </div>
+        <div class="header">&nbsp;</div>
+    </div>
+    <div class="clear"></div>
+</div>

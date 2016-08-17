@@ -1,0 +1,12 @@
+<form id="my_accountForm" method="post" enctype="multipart/form-data" action="{$smarty.const.CURRENT_URL}">
+	<div id="UpdateAccount">
+    	{if $status}
+    	<div class="status{if $status.type == 0}Success{else}Fail{/if}">
+        	{$status.message}
+        </div>{if $status.type == 1}<br />{/if}
+        {/if}
+{include file="`$smarty.const.THEME_URL`user_info.html"}
+{include file="`$smarty.const.THEME_URL`user_address.html"}
+	    <div class="clear"></div>
+    </div>
+</form>

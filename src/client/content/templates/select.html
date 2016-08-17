@@ -1,0 +1,134 @@
+    <div id="{$data.category}Section" class="section">
+    {assign var="totalCampaign" value=0}
+    {foreach from=$dataList item=data name=count}
+        {if $data.campaignCount > 0 && $data.parentId != 0 }
+            {if ($data.parentId != $lastParentId)}
+                {assign var="campaignCreated" value="1"}
+                {assign var="totalCampaign" value=$totalCampaign+1}
+                {if $smarty.foreach.count.index != 0 && $totalCampaign > 1}
+    			</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+                {/if}
+
+            	{assign var="campaignFound" value="1"}
+        <div class="campaignSection">
+           <div class="sectionInfo">
+                <div class="blueHeader2">
+                    <div class="left">
+                        <h1><a href="javascript:" onclick="$('#campaign-{$data.parentId}').slideToggle();">{$data.parentTitle} {if $data.parentFeatured}<strong><span style="color: #f6e9b5;">&nbsp;New Ads!</span></strong>{/if}</a></h1>
+                    </div>
+                    <div class="selectFlash">
+                {literal}
+                        <script language="javascript">
+                            if (AC_FL_RunContent == 0) {
+                                alert("This page requires AC_RunActiveContent.js.");
+                            } else {
+                                AC_FL_RunContent(
+                                    'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
+                                    'width', '250',
+                                    'height', '23',
+                                    'src', 'templates/ad_generator/swf/select_print_bttn',
+                                    'quality', 'high',
+                                    'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+                                    'align', 'middle',
+                                    'play', 'true',
+                                    'loop', 'true',
+                                    'scale', 'showall',
+                                    'wmode', 'transparent',
+                                    'devicefont', 'false',
+                                    'id', 'swf/select_print_bttn',
+                                    'bgcolor', '#ffffff',
+                                    'name', 'swf/select_print_bttn',
+                                    'menu', 'true',
+				{/literal}
+                                    //'flashvars', 'title={$data.campaignShortTitle}&url={$smarty.const.PAGE_LINK}?campaignId={$data.campaignId}&type={$type}',
+									'flashvars', 'title={$data.parentTitle}&div=campaign-{$data.parentId}',
+				{literal}
+                                    'allowFullScreen', 'false',
+                                    'allowScriptAccess','sameDomain',
+                                    'movie', 'templates/ad_generator/swf/select_print_bttn',
+                                    'salign', ''
+                                    ); //end AC code
+                            }
+                            function callLightbox(url)
+                            {
+                                //alert(url);
+                                $.fn.colorbox({href:url, iframe:true, innerWidth:725, innerHeight:400});
+                            }
+							function toggleDiv(str)
+							{
+								$('#'+str).slideToggle();
+							}
+
+                        </script>
+                        <noscript>
+                            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="250" height="23" id="swf/select_print_bttn" align="middle">
+                                <param name="allowScriptAccess" value="sameDomain" />
+                                <param name="allowFullScreen" value="false" />
+                                <param name="wmode" value="transparent" />
+                                <param name="movie" value="templates/ad_generator/swf/select_print_bttn.swf" />
+                                <param name="quality" value="high" />
+                                <param name="bgcolor" value="#ffffff" />
+                {/literal}
+                                <param name="flashvars" value="title={$data.campaignShortTitle}&url={$smarty.const.PAGE_LINK}?campaignId={$data.campaignId}&type={$type}" />
+                {literal}
+                                <embed src="templates/ad_generator/swf/select_print_bttn.swf" quality="high" bgcolor="#ffffff" width="250" height="23" name="swf/select_print_bttn" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                            </object>
+                        </noscript>
+                {/literal}
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="sectionText">
+                	{$data.parentContent}
+        		</div>
+                <div id="campaign-{$data.parentId}" style="display:none;">
+            {/if}
+
+                    <div class="subcampaign-row" style="padding-left:15px;">
+                        <div class="subcampaign-img"><a href="{$smarty.const.PAGE_LINK}?campaignId={$data.campaignId}"{if $type == 'lightbox'} class="lightBoxPrint"{/if} title="Please select {$data.campaignShortTitle} campaign."><img src="{$data.thumbnail}" /></a></div>
+                        <div class="subcampaign-info">
+                            <h2>{$data.title}{* | {$smarty.foreach.count.index} | ({$data.campaignCount})*}</h2>
+                            {$data.content}
+                            <div>
+                            {* <div style="display:none;">{$data.title} | {$smarty.foreach.count.index} | {$data.parentTitle}: {$data.parentId} = {$lastParentId} | ({$data.campaignCount})</div> *}
+                            <a href="{$smarty.const.PAGE_LINK}?campaignId={$data.campaignId}"{if $type == 'lightbox'} class="lightBoxPrint"{/if} title="Please select {$data.campaignShortTitle} campaign."><img src="/content/images/{if $adButton}{$adButton}{else}bttn_select_ad.png{/if}" alt="select ad" /></a>
+                            
+                            {if $data.hasCustomize}
+                            	<a href="{$smarty.const.PAGE_LINK}?campaignId={$data.campaignId}&custom"{if $type == 'lightbox'} class="lightBoxPrint"{/if} title="Please select {$data.campaignShortTitle} campaign."><img src="/content/images/bttn_create_my_ad_custom.png" alt="select ad" /></a>
+                            {/if}
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <br />
+                        <hr class="bluehr" />
+                    </div>
+
+        {/if}
+
+        {if ($campaignCreated == 1 && $smarty.foreach.count.index == $total-1)}
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        {/if}
+
+        {assign var="campaignFound" value="0"}
+        {if $data.campaignCount > 0 && $data.parentId != 0 }
+	        {assign var="lastParentId" value=$data.parentId}
+        {/if}
+    {/foreach}
+    </div>
+{literal}
+<script>
+/*
+var eRow = $('.campaignSection');
+eRow.each(function(){
+	eItem = $(this).find('div.subcampaign-row:last-child');
+	eItem.find('hr').hide();
+});
+*/
+</script>
+{/literal}

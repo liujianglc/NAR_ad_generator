@@ -15,7 +15,6 @@
   <meta name="keywords" content="AngularJS, angular-kickstart, gulp, bower, vesparny" />
 
   <!-- build:css assets/css/main.css -->
-  <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/src/client/content/css/main.css">
   <!-- endbuild -->
   <style>
@@ -24,21 +23,24 @@
       display: none !important;
   }
   </style>
+  <base href="/"/>
 </head>
 
 <body>
-  <base href="/"/>
   <div class="wrapper">
-    <header ui-view="header"></header>
-    <div ui-view class="container "></div>
-    <footer ui-view="footer"></footer>
+    <header ui-view="header" class="center" style="position:relative;"></header>
+    <div ui-view class="center "></div>
+    <footer ui-view="footer" class="center"></footer>
   </div>
 
   <!-- build:js assets/js/vendor.js -->
 
   <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/src/client/content/js/common.js"></script>
 
   <script type="text/javascript" src="/bower_components/angular/angular.js"></script>
+  <script type="text/javascript" src="/bower_components/swfobject/swfobject/swfobject.js"></script>
+  <script type="text/javascript" src="/bower_components/angular-swfobject/angular-swfobject.js"></script>
   <script type="text/javascript" src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <!-- endbuild -->
 
@@ -49,9 +51,11 @@
   <script type="text/javascript" src="/src/client/app/core/home/home.js"></script>
   <script type="text/javascript" src="/src/client/app/core/login/login.js"></script>
   <script type="text/javascript" src="/src/client/app/core/cart/cart.js"></script>
-  <script type="text/javascript" src="/src/client/app/core/myaccount/myaccount.js"></script>
+  <script type="text/javascript" src="/src/client/app/core/my-account/my-account.js"></script>
+  <script type="text/javascript" src="/src/client/app/core/register/register.js"></script>
   <script type="text/javascript" src="/src/client/app/core/select-print/select-print.js"></script>
   <script type="text/javascript" src="/src/client/app/core/select-broadcast/select-broadcast.js"></script>
+  <script type="text/javascript" src="/src/client/app/core/select-message/select-message.js"></script>
   <script type="text/javascript" src="/src/client/app/core/select-online/select-online.js"></script>
 
   <script type="text/javascript" src="/src/client/app/common/directives/login.js"></script>
@@ -61,7 +65,7 @@
   <script type="text/javascript" src="/src/client/app/common/filters/uppercase.js"></script>
 
   <script type="text/javascript" src="/src/client/app/common/header.js"></script>
-  <script type="text/javascript" src="/src/client/app/common/footer.js"></script> 
+  <script type="text/javascript" src="/src/client/app/common/footer.js"></script>
 
   <!-- endbuild -->
 </body>

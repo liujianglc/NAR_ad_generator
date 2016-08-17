@@ -1,0 +1,43 @@
+<div style="width:640px; height:480px; overflow:auto;">
+{if $data}
+	<div align="right" style="padding-right:10px;"><a href="#null" onclick="window.print();">print</a></div>
+    <h1>Invoice #{$data.invoiceId}</h1>
+    <h2>Items</h2>
+    {assign var=subtotal value=0}
+    {math equation=1 assign=itemNumber}
+    {foreach from=$invoiceData.items key=itemKey item=item}
+        {assign var=productName value=$item.product}
+        {assign var=productItems value=$item.details}
+    <p>
+        <strong>{$itemNumber}. {$productName}</strong><br />
+        {foreach from=$productItems key=productKey item=productItem}
+        	{math equation="x * y" x=$productItem.price y=$productItem.qty format="%.2f" assign=productTotal}
+        	Type: {$productKey} - {$productItem.option}<br />
+            Quantity: {$productItem.qty} x ${math equation=$productItem.price format="%.2f"} = ${$productTotal}<br /><br />
+            {math equation="x+y" x=$productTotal y=$subtotal assign=subtotal}
+        {/foreach}
+	</p>
+    	 {math equation=$itemNumber+1 assign=itemNumber}
+    {/foreach}
+    <p>Subtotal: ${math equation=$subtotal format="%.2f"}<br />
+    Shipping: ${math equation=$invoiceData.shipping_amount format="%.2f"}<br />
+    <strong>GrandTotal: ${math equation="x + y" x=$invoiceData.shipping_amount y=$subtotal format="%.2f"}</strong></p>
+    <hr />
+    <h3 style="color:#333">Billing Address</h3>
+    <p>
+    {$invoiceData.bill_fname} {$invoiceData.bill_lname}<br />
+    {$invoiceData.bill_street}<br />
+    {$invoiceData.bill_city|@ucwords}, {$invoiceData.bill_state} {$invoiceData.bill_zip}<br />
+    {$invoiceData.bill_country}
+    </p>
+    <h3 style="color:#333">Shipping Address</h3>
+    <p>
+    {$invoiceData.ship_fname} {$invoiceData.ship_lname}<br />
+    {$invoiceData.ship_street}<br />
+    {$invoiceData.ship_city|@ucwords}, {$invoiceData.ship_state} {$invoiceData.ship_zip}<br />
+    {$invoiceData.ship_country}
+    </p>
+{else}
+	<p>Invoice not found.</p>
+{/if}
+</div>

@@ -1,0 +1,12 @@
+{include file="`$smarty.const.THEME_COMMON`status.html"}
+<form method="post" enctype="multipart/form-data" action="{$smarty.const.CURRENT_URL}">
+    <div id="Register">
+{include file="`$smarty.const.THEME_URL`user_info.html"}
+{include file="`$smarty.const.THEME_URL`user_address.html"}
+      <div class="clear"></div>
+    </div>
+    <div id="citycounty"></div>
+</form>
+{*
+{include file="`$smarty.const.THEME_COMMON`register_nav.html"}
+*}

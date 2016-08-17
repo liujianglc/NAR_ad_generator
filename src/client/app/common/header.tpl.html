@@ -1,12 +1,50 @@
-<div class="container bg-primary " style="padding:5px;"> 
-    <div class="pull-right ">
-        <a ui-sref="root.home" style="color:white">HOME</a>
-        <a ui-sref="root.myaccount"  style="color:white">MY ACCOUNT</a>
-        <a ui-sref="root.cart"  style="color:white">CART</a>
-        <a ui-sref="root.login"  style="color:white">LOGIN</a>
+<div id="navigation" class="center">
+  <swf-object
+  swf-url="/content/navigation.swf"
+  swf-width="980"
+  swf-height="114"
+  swf-params="{
+    wmode: 'transparent'
+  }",
+  swf-version="10.2"></swf-object>
+  <div class="hidden">
+      <h1>National Association of Realtors &copy;</h1>
+      <p>Public Awareness Campaign Materials Center</p>
+      <a href="{$smarty.const.BASE_URL}">HOME</a>
+      <ul>
+          <li><a href="{$smarty.const.MY_ACCOUNT_URL}">My Account</a></li>
+          <li><a href="{$smarty.const.CART_URL}">Cart</a></li>
+          <li><a href="{$smarty.const.LOGOUT_URL}">Log Out</a></li>
+      </ul>
+      <ul>
+          <li><a href="{$smarty.const.PRINT_URL}">Select Print</a></li>
+          <li><a href="{$smarty.const.BROADCAST_URL}">Select Broadcast</a></li>
+          <li><a href="{$smarty.const.ONLINE_URL}">Select Online</a></li>
+      </ul>
     </div>
 </div>
-<div class="container bg-danger" style="padding:10px;">
+<div class="clear"></div>
+<div id="subnav" class="center">
+	<ul>
+    	<li><a ui-sref="root.download-stats"><img id="bttnStat" onmouseover="MM_swapImage('bttnStat','','/content/images/bttnStats_r.png',0)" onmouseout="MM_swapImgRestore()" src="/content/images/bttnStats.png" border="0" alt="Download Stats" /></a></li>
+    	<li><a ui-sref="root.approval-pdf"><img id="bttnApprovePdf" onmouseover="MM_swapImage('bttnApprovePdf','','/content/images/bttnApprovePdf_r.png',0)" onmouseout="MM_swapImgRestore()" src="/content/images/bttnApprovePdf.png" border="0" alt="Approve (User PDF)" /></a></li>
+    	<li><a ui-sref="root.approval-user"><img src="/content/images/bttnApproveUser.png" alt="Approve Users" name="bttnApproveUser" border="0" id="bttnApproveUser" onmouseover="MM_swapImage('bttnApproveUser','','/content/images/bttnApproveUser_r.png',0)" onmouseout="MM_swapImgRestore()" /></a></li>
+    </ul>
+    <div class="clear"></div>
+</div>
+
+
+<div  id="navigation" style="position:absolute;top:-9px;right:0px;" class="">
+    <ul id="subnav">
+        <li ><a ui-sref="root.home" style="color:white">HOME</a></li>
+        <li ><a ui-sref="root.my-account"  style="color:white">MY ACCOUNT</a></li>
+        <li ><a ui-sref="root.cart"  style="color:white">CART</a></li>
+        <li><a ui-sref="root.login"  style="color:white">LOGIN</a></li>
+
+  </ul>
+</div>
+
+<div class="container bg-danger hidden" style="padding:10px;">
     <div class="clearfix">
     	<div class="col-xs-4">
     		<a ui-sref="root.home"><img src="/src/client/content/images/gray-logo-default.png"/></a>
@@ -18,13 +56,13 @@
     			<a ui-sref="root.select-online" class="btn btn-primary">SELECT ONLINE</a>
     		</div>
     		<div class="">
-    			CONSUMER ADVERTISING CAMPAIGN MATERIALS CENTER 
+    			CONSUMER ADVERTISING CAMPAIGN MATERIALS CENTER
     		</div>
 
     	</div>
     </div>
 </div>
-<div class="container text-center" style="padding:20px 10px">
+<div class="container text-center hidden" style="padding:20px 10px">
 	<div class="col-xs-4">
 		<a ui-sref="root.download_stats" class="btn btn-warning">DOWNLOAD STATS</a>
 	</div>

@@ -1,0 +1,20 @@
+<div class="magento-hide">
+    {if !$smarty.const.MOBILE_CHECK}
+    {literal}
+    <style>
+    .newFooter { color:#085A9A; font-size:10px; padding:10px 40px 0 0; text-align:right; width:897px;  text-transform:uppercase;}
+    .newFooter a{ text-decoration:none; }
+    </style>
+    {/literal}
+    <div class="center newFooter">
+        <a href="/terms.php">Terms of Use</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="/privacy.php">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;Copyright &copy;2010 NAR . All rights reserved.
+    </div>
+    {else}
+</div>
+    <div id="footer" class="center">
+        <div class="hidden">National Association of Realtors <sup>&reg;</sup></div>
+        <span><a href="/terms.php">Terms of Use</a> | <a href="/privacy.php">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;Copyright &copy;<i style="font-style:normal;" class="magento-hide">{$smarty.now|date_format:'%Y'}</i> NAR . All rights reserved.</span>
+    </div>
+<div class="magento-hide">
+    {/if}
+</div>

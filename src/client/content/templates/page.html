@@ -1,0 +1,20 @@
+{include file="`$smarty.const.THEME_URL`header.html"}
+<body>
+{include file="`$smarty.const.THEME_URL`navigation.html"}
+<noscript>
+<div align="center" style=" background-color:white; border:red solid 1px; color:red; padding:10px; margin:10px auto; width:880px;">
+This site uses javascript that are not supported by your browser. <br>
+Please use a supported browser such as Firefox, Internet Explorer, or Safari.
+</div>
+</noscript>
+<div class="center">
+    <div class="container">
+{include file="`$smarty.const.THEME_URL``$smarty.const.THEME_PAGE`"}
+    </div>
+</div>
+{if $smarty.const.ENABLE_FOOTER}
+{include file="`$smarty.const.THEME_URL`footer.html"}
+{/if}
+{include file="`$smarty.const.THEME_COMMON`js_tracking.html"}
+</body>
+</html>

@@ -1,0 +1,52 @@
+{include file="`$smarty.const.THEME_COMMON`status.html"}
+<div id="ApprovePdf">
+    <div class="header">
+      <div class="headerBg">
+        <h1 class="left">{$smarty.const.PAGE_TITLE}</h1>
+        <div align="right">&nbsp;</div>
+        <div class="clear"></div>
+      </div>
+    </div>
+{counter start=0 print=false assign=counter}
+    <div class="data">
+{if $data}
+        <div class="row darkBlueHeader">
+            <div class="col1"><strong>Title</strong></div>
+            <div class="col2"><strong>Date</strong></div>
+            <div class="col3">&nbsp;</div>
+            <div class="col4"><strong>PDF Pending Approval</strong></div>
+            <div class="clear"></div>
+        </div>
+{/if}
+{foreach from=$dataList item=data}
+	{counter print=false}
+        <form action="{$smarty.const.APPROVAL_URL}" method="post" enctype="multipart/form-data" id="form{$counter}" style="padding:0; margin:0;">
+            <a name="{$data.pdfId}"></a>
+            <div class="row {cycle values=",lightBlueBg"}"{if $pdfId == $data.pdfId} style="border:2px solid red;"{/if}>
+                <div class="col1">{$counter}. {$data.title}</div>
+                <div class="col2">{if $data.modified}{$data.modified}{else}{$data.created}{/if}</div>
+                <div class="col3">
+                    <a href="{$data.lowPdf}" target="_blank">View</a>
+                </div>
+                <div  class="col4">
+                    <input type="submit" name="approve" value="approve" /> <input type="button" name="cancel" value="decline" onClick="document.getElementById('decline{$counter}').style.display='';" />
+                    <input type="hidden" name="pdfId" value="{$data.pdfId}" />
+                    <input type="hidden" name="userId" value="{$data.userId}" />
+                    <input type="hidden" name="title" value="{$data.title}" />
+                    <div id="decline{$counter}" class="declineReason" style="display:none;">
+                        Reason: <br />
+                        <textarea name="decline_reason" rows="3"></textarea><br />
+                        <input type="submit" name="decline" value="submit" />
+                        <input type="button" name="cancel" value="cancel" onClick="document.getElementById('decline{$counter}').style.display='none';" />
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </form>
+{/foreach}
+{if !$data}
+        <h1>There are 0 pdf pending approval.</h1>
+{/if}
+	</div>
+</div>
+<div class="header">&nbsp;</div>

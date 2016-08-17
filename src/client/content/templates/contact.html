@@ -1,0 +1,42 @@
+{include file="`$smarty.const.THEME_COMMON`status.html"}
+<div id="Contact">
+  <form method="post" enctype="multipart/form-data" action="{$smarty.const.CONTACT_URL}">
+        <div class="header">
+            <div class="headerBg">
+              <h1 class="left">{$smarty.const.PAGE_TITLE}</h1>
+              <div align="right"></div>
+              <div class="clear"></div>
+            </div>
+        </div>
+		<div class="generic_bg">
+        	<div>Need help or have a question? Fill out the form and someone from our team will respond to you as soon as possible. </div>
+            <table border="0" cellpadding="5" cellspacing="0">
+                <tr>
+                    <td width="75" align="right">Name: </td>
+                    <td><input name="name" type="text" id="name" value="{$data.name}" /></td>
+                </tr>
+                <tr>
+                    <td width="75" align="right">Email: </td>
+                    <td><input name="email" type="text" id="email" value="{$data.email}" /></td>
+                </tr>
+                <tr>
+                    <td width="75" align="right" valign="top">Message: </td>
+                    <td><textarea name="message" rows="5" id="message" type="text" >{$data.message}</textarea></td>
+                </tr>
+                <tr>
+                    <td width="75" align="right" valign="top"></td>
+                    <td>*All fields required</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input name="funct" type="submit" onclick="MM_validateForm('name','','R','email','','RisEmail','message','','R');return document.MM_returnValue" value="submit" /></td>
+                </tr>
+            </table>
+{if !$status}
+{else}
+{/if}
+        </div>
+        <div class="header" style="padding:0px; height:23px;">&nbsp;</div>
+  </form>
+{*include file=`$smarty.const.THEME_COMMON`register_nav.html*}
+</div>

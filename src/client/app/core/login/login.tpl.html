@@ -1,19 +1,52 @@
-<div class="clearfix"></div>
-<div class="page-title">
-    
+<div class="clear"></div>
+<div class="center">
+    <div class="container">
+        <div style="margin-top:10px">
+          <swf-object
+          swf-url="/content/adgen_intro.swf"
+          swf-width="950"
+          swf-height="236"
+          swf-params="{
+            wmode: 'transparent',
+            menu: true,
+            scale:'showall'
+          }",
+          swf-version="10.2"></swf-object>
+        </div>
+    </div>
 </div>
 
-<div class="up-item" ng-controller="LoginCtrl">
-	<div class="bot-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<login></login>
-				</div>
-				<div class="col-md-6 bl">
-					<register></register>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="Login">
+  <div class="column1">
+      <div class="column1Wrapper">
+            <h1>Welcome to the Ad Generator.  Note: Ad generator usage is limited to</h1>
+            <h1>state or local REALTOR<sup>&reg;</sup> association staff, per the campaign's usage</h1>
+            <h1>guidelines.  Individual NAR members are not permitted to use the system</h1>
+            <h1>to customize materials.</h1>
+          <div style="padding-top:25px"></div>
+            <div class="left">
+              <a ui-sref="root.register"><img src="/content/images/bttnSignUp.gif" alt="Sign Up Now" border="0" /></a>
+            </div>
+            <div class="left" style="padding-left:10px;">
+              Haven&rsquo;t registered? <br />
+                Sign up and start building your campaign.<br />
+                (All users of the new Ad Generator website must register).
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="column2">
+        <h1></h1>
+        Email: <br />
+        <input name="email" type="text" id="email" value="" /><br />
+        Password: <br />
+        <input name="password" type="password" id="password" /><br />
+        <div style="padding-top:3px;"><label><input type="checkbox" name="remember" id="remember" value="1" {if $userEmail.save}checked="checked"{/if} /> Remember me on this computer</label><br /><br /></div>
+        <input type="submit" name="submit" id="submit" class="bttnLogin" value="{$smarty.const.PAGE_TITLE}" onclick="MM_validateForm('password','','R');return document.MM_returnValue" />
+        <p class="info">
+          <a href="{$smarty.const.FORGOT_PASSWORD_URL}">Forgot Your Password?</a>
+            &nbsp;&nbsp;<a href="{$smarty.const.CONTACT_URL}">Contact Us</a>
+        </p>
+    </div>
+    <div class="clear"></div>
 </div>

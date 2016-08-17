@@ -1,0 +1,89 @@
+<div id="Online">
+    <div class="header">
+      <div class="headerBg3">
+        <div class="left">
+            <h1>Online Ads:<span> Select an online marketing message, preview the banner, download the assets to your computer, and send to your website publisher.</span></h1>
+        </div>
+        <div align="right">&nbsp;</div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div id="dropDown">
+    	<select onchange="MM_jumpMenu('parent',this,0)">
+{foreach from=$campaignList item=campaign}
+        	<option value="{$smarty.const.PAGE_URL}?campaignId={$campaign.campaignId}"{if $campaign.campaignId == $campaignId} selected="selected"{/if}>{$campaign.campaignShortTitle}</option>
+{/foreach}
+        </select>
+        <span>&nbsp;&nbsp;&nbsp;Need a Different Message? Pull down for a jumplink.</span>
+    </div>
+{assign var="countCampaign" value=0}
+{foreach from=$data key=campaignSectionTitle item=campaignSection}
+    {assign var="dataTotal" value=$data|@count}
+    {assign var="count" value=0}
+    <div class="header">
+        <div class="headerBg">
+          <h1 class="left">ONLINE: <span>{$campaignSection[0].campaignShortTitle} Message: <strong>{$campaignSectionTitle}</strong></span></h1>
+          <div align="right"></div>
+          <div class="clear"></div>
+        </div>
+    </div>
+    <div id="{$data.category}Section" class="yellowBg">
+    {foreach from=$campaignSection item=campaign}
+        <div class="onlineItem" style="float:left; width:{$campaign.width}px; ">
+            <div>
+            	<a href="preview.php?fileId={$campaign.onlineId}" class="lightBoxAdPreview link-preview" title="{$campaign.title}"><img src="{$campaign.thumbnail}?{1|rand:1000}" border="0" /></a>
+        	</div>
+            <div class="lightBoxItem">
+            	<a href="{$smarty.const.PREVIEW_URL}?fileId={$campaign.onlineId}" class="lightBoxAdPreview" title="{$campaign.title}"><img src="/content/images/bttnPreview.png" alt="preview" border="0" /></a>
+        	</div>
+            <div class="download">
+            	<a href="{$smarty.const.DOWNLOAD_URL}?fileId={$campaign.onlineId}"><img src="/content/images/bttnDownload.png" alt="download" border="0" /></a>
+        	</div>
+        </div>
+        {if $campaignSection|@count-1 == $count}
+        <div class="clear"></div>
+        {/if}
+        {assign var="count" value=$count+1}
+	{/foreach}
+    </div>
+	{assign var="lastCategory" value=$campaign.category}
+	{assign var="countCampaign" value=$countCampaign+1}
+{/foreach}
+{literal}
+<script>
+$(document).ready(function()
+{
+	$('.lightBoxAdPreview img').each(function()
+	{
+		var $this	= $(this);
+
+		$this.load(function()
+		{
+			w 	= $this.width(),
+			h 	= $this.height(),
+			$p 	= $this.parent();//s('.onlineItem');
+
+			$p.data('width', w);
+			$p.data('height', h);
+		});
+	})
+
+	$('.lightBoxAdPreview').click(function(e)
+	{
+		e.preventDefault();
+
+		var $c 			= $(this),
+			$onlineItem = $c.parents('.onlineItem').eq(0),
+			$link		= $('.link-preview', $onlineItem);
+
+		$c.colorbox
+		({
+			url: 			$link.attr('href'),
+			innerWidth: 	String($link.data('width'))+'px',
+			innerHeight: 	String($link.data('height')+10)+'px'
+		})
+	})
+})
+</script>
+{/literal}
+</div>

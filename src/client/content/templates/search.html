@@ -1,0 +1,54 @@
+{* FLEXBOX *}
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}modules/flexbox/js/jquery.flexbox.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{$smarty.const.THEME_COMMON_PATH}modules/flexbox/css/jquery.flexbox.css" />
+	<form method="get">
+		<div id="searchId"></div>
+        <input type="hidden" name="{$flexId}" id="{$flexId}" value="{$data.$flexId}" />
+        <input type="hidden" name="{$flexName}" id="{$flexName}" value="{$data.$flexName}" />
+        &nbsp;<input type="button" name="funct" value="edit" onclick="window.location='{$smarty.const.PAGE_URL}?userId='+document.getElementById('{$flexId}').value" />
+        <br />
+		<br />
+    {literal}
+		<script type="text/javascript">   	
+            $().ready(function() 
+			{  
+	{/literal}
+				var flexBox = $('#searchId').flexbox('{$flexData}', 
+    {literal}
+				{
+	{/literal}
+					resultTemplate: '{$flexFormat}',
+    {literal}
+					paging: {  
+						pageSize: 5  
+					},
+					maxCacheBytes:1,
+					onSelect: function() 
+					{
+	{/literal}
+						$('#{$flexId}').val(this.getAttribute('hiddenValue'));
+						$('#{$flexName}').val(this.value);
+						//alert(this.getAttribute('hiddenValue'));
+	{literal}
+					}, 
+					highlightMatches:false
+				});
+				
+				$('#searchId_input').blur(function()
+				{
+					if(this.value == "")
+					{
+	{/literal}
+						$('#{$flexId}').val('');
+						$('#{$flexName}').val('');
+	{literal}
+					}
+				});
+				
+				$('body').click(function() {
+					$('#searchId').hideResults();
+				});						 
+			}); 	
+        </script>  
+    {/literal}
+	</form>

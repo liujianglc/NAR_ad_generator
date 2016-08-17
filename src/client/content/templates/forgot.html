@@ -1,0 +1,27 @@
+{include file="`$smarty.const.THEME_COMMON`status.html"}
+<div id="Forgot">
+  <form method="post" enctype="multipart/form-data" action="{$smarty.const.CURRENT_URL}">
+    <div class="header">
+        <div class="headerBg">
+          <h1 class="left">{$smarty.const.PAGE_TITLE}</h1>
+          <div align="right"></div>
+          <div class="clear"></div>
+        </div>
+    </div>
+    <div class="generic_bg">
+    <p>Forgot your password? Enter your login email below and we will send you an email with your password. </p>
+    <table border="0" cellpadding="5" cellspacing="0">
+      <tr>
+          <td width="75" align="right">Email: </td>
+          <td><input name="email" type="text" id="email" /></td>
+      </tr>
+      <tr>
+          <td>&nbsp;</td>
+          <td><input name="funct" type="submit" onclick="MM_validateForm('email','','RisEmail');return document.MM_returnValue" value="submit" /></td>
+      </tr>
+    </table>
+    </div>
+    <div class="header" style="padding:0px; height:23px;">&nbsp;</div>
+  </form>
+{*include file=`$smarty.const.THEME_COMMON`register_nav.html*}
+</div>

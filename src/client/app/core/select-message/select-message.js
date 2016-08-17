@@ -7,12 +7,12 @@
    */
   function config($stateProvider) {
     $stateProvider
-      .state('root.myaccount', {
-        url: '/myaccount',
+      .state('root.select-message', {
+        url: '/select-message',
         views: {
           '@': {
-            templateUrl: '/src/client/app/core/myaccount/myaccount.tpl.html',
-            controller: 'MyAccountCtrl as myaccount'
+            templateUrl: '/src/client/app/core/select-message/select-message.tpl.html',
+            controller: 'SelectMessageCtrl as select_message'
           }
         }
       });
@@ -22,11 +22,11 @@
    * @name  gettingStartedCtrl
    * @description Controller
    */
-  function MyAccountCtrl($log) {
+  function SelectMessageCtrl($log) {
       $log.debug('I\'m a method');
   }
 
-  angular.module('myaccount', [])
+  angular.module('select-message', [])
     .config(config)
-    .controller('MyAccountCtrl', MyAccountCtrl);
+    .controller('SelectMessageCtrl', SelectMessageCtrl);
 })();

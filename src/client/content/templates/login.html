@@ -1,0 +1,90 @@
+{include file="`$smarty.const.THEME_COMMON`status.html"}
+<form method="post" enctype="multipart/form-data" action="{$smarty.const.LOGIN_URL}">
+    <div style="margin-top:10px;">
+		{*<img src="/content/images/img_login.jpg" />*}
+        {literal}
+						<script language="javascript">
+                            if (AC_FL_RunContent == 0) {
+                                alert("This page requires AC_RunActiveContent.js.");
+                            } else {
+                                AC_FL_RunContent(
+                                    'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
+                                    'width', '950',
+                                    'height', '236',
+{/literal}
+                                    'src', '{$smarty.const.THEME_PATH}swf/adgen_intro',
+{literal}
+                                    'quality', 'high',
+                                    'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+                                    'align', 'middle',
+                                    'play', 'true',
+                                    'loop', 'true',
+                                    'scale', 'showall',
+                                    'wmode', 'transparent',
+                                    'devicefont', 'false',
+                                    'id', 'swf/adgen_intro',
+                                    'bgcolor', '#ffffff',
+                                    'name', 'swf/adgen_intro',
+                                    'menu', 'true',
+                                    'allowFullScreen', 'false',
+                                    'allowScriptAccess','sameDomain',
+{/literal}
+                                    'movie', '{$smarty.const.THEME_PATH}swf/adgen_intro',
+{literal}
+                                    'salign', ''
+                                    ); //end AC code
+                            }
+                        </script>
+                        <noscript>
+                            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="961" height="236" id="swf/select_print_bttn" align="middle">
+                                <param name="allowScriptAccess" value="sameDomain" />
+                                <param name="allowFullScreen" value="false" />
+                                <param name="wmode" value="transparent" />
+{/literal}
+                                <param name="movie" value="{$smarty.const.THEME_PATH}swf/adgen_intro.swf" />
+{literal}
+                                <param name="quality" value="high" />
+                                <param name="bgcolor" value="#ffffff" />
+                                {/literal}<embed src="{$smarty.const.THEME_PATH}swf/adgen_intro.swf"{literal} quality="high" bgcolor="#ffffff" width="950" height="236" name="swf/select_print_bttn" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                            </object>
+                        </noscript>
+                        {/literal}
+	</div>
+    <div id="Login">
+    	<div class="column1">
+        	<div class="column1Wrapper">
+                <h1>Welcome to the Ad Generator.  Note: Ad generator usage is limited to</h1>
+                <h1>state or local REALTOR<sup>&reg;</sup> association staff, per the campaign's usage</h1>
+                <h1>guidelines.  Individual NAR members are not permitted to use the system</h1>
+                <h1>to customize materials.</h1>
+              <div style="padding-top:25px"></div>
+                <div class="left">
+                  <a href="{$smarty.const.REGISTER_URL}"><img src="/content/images/bttnSignUp.gif" alt="Sign Up Now" border="0" /></a>
+                </div>
+                <div class="left" style="padding-left:10px;">
+                  Haven&rsquo;t registered? <br />
+                    Sign up and start building your campaign.<br />
+                    (All users of the new Ad Generator website must register).
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="column2">
+            <h1>{$smarty.const.SITE_NAME} {$smarty.const.PAGE_TITLE}</h1>
+            Email: <br />
+            <input name="email" type="text" id="email" value="{$userEmail.email}" /><br />
+            Password: <br />
+            <input name="password" type="password" id="password" /><br />
+            <div style="padding-top:3px;"><label><input type="checkbox" name="remember" id="remember" value="1" {if $userEmail.save}checked="checked"{/if} /> Remember me on this computer</label><br /><br /></div>
+            <input type="submit" name="submit" id="submit" class="bttnLogin" value="{$smarty.const.PAGE_TITLE}" onclick="MM_validateForm('password','','R');return document.MM_returnValue" />
+            <p class="info">
+            	{if $smarty.const.ALLOW_PASSWORD_RETRIEVE &&  $smarty.const.FORGOT_PASSWORD_PAGE != $smarty.const.CURRENT_PAGE}<a href="{$smarty.const.FORGOT_PASSWORD_URL}">Forgot Your Password?</a>{/if}
+                {if $smarty.const.ALLOW_GENERAL_CONTACT &&  $smarty.const.CONTACT_PAGE != $smarty.const.CURRENT_PAGE}&nbsp;&nbsp;<a href="{$smarty.const.CONTACT_URL}">Contact Us</a>{/if}
+            </p>
+        </div>
+        <div class="clear"></div>
+        <div id="footer2">
+        	<a href="terms.php">Terms of Use</a> | <a href="privacy.php">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;Copyright &copy;{$smarty.now|date_format:'%Y'} NAR . All rights reserved.
+		</div>
+    </div>
+</form>

@@ -1,0 +1,115 @@
+{include file="`$smarty.const.THEME_COMMON`status.html"}<br />
+<div id="CustomSize">
+    <div class="size">
+      <div class="header">
+        <div class="headerBg">
+          <h1 class="left">Order Custom Sizes and Outdoor Materials</h1>
+          <div align="right">&nbsp;</div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="columnItemContent">
+        <p>To request a size not provided above, please enter the size needed in the box below. The information will be sent to the creative agency, and they wil contact you to finalize the details, including costs.</p>
+        <form action="custom_size.php" method="post" enctype="multipart/form-data">
+          <label>
+            <input name="custom_size" id="custom_size" value="1" type="checkbox" />
+            Custom Print Size:</label>
+          &nbsp;
+          <input name="size" id="size" type="text" />
+          <br />
+          <label>
+            <input name="billboard" id="billboard" value="1" type="checkbox" />
+            Outdoor Billboard</label>
+          <br />
+          <label>
+            <input name="bus_shelter" id="bus_shelter" value="1" type="checkbox" />
+            Bus Shelter</label>
+          <br />
+          <label>
+            <input name="other" id="other" value="1" type="checkbox" />
+            Other:</label>
+          &nbsp;
+          <input name="other_size" id="other_size" type="text" />
+          <h1>Optional Information</h1>
+          <div class="row">
+            <div class="text">File Format</div>
+            <div class="input"><input type="text" name="file_format" value=""></div>
+            <div class="clear"></div>
+          </div>
+          <div class="row">
+            <div class="text">Resolution (DPI)</div>
+            <div class="input"><input type="text" name="resolution_dpi" value=""></div>
+            <div class="clear"></div>
+          </div>
+          <div class="row">
+            <div class="text">Delivery Method<br>(FTP Upload)</div>
+            <div class="input">
+              <textarea name="delivery_method" rows="4"></textarea>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="row">
+            <div class="text">OR</div>
+            <div>&nbsp;</div>
+            <div class="clear"></div>
+          </div>
+          <div class="row">
+            <div class="text">Attach Spec Sheet :</div>
+            <div class="input"><input type="file" name="spec"></div>
+            <div class="clear"></div>
+          </div>
+          <div class="row">
+            <div class="text">&nbsp;</div>
+            <div class="input">accpetable file formats: {$fileTypeStr}<br />max upload size: 5 MB</div>
+            <div class="clear"></div>
+          </div>
+          <div class="row">
+            <div class="text">&nbsp;</div>
+            <div class="input"><input name="funct" value="submit" type="submit" class="bttnSendRequest" alt="Submit Order" onclick="return checkCustomSize();" /></div>
+            <div class="clear"></div>
+          </div>
+        </form>
+      </div>
+      <div class="header">&nbsp;</div>
+    </div>
+    <div class="info">
+      <div class="header">
+        <div class="headerBg">
+          <h1 class="left">About Outdoor Advertising</h1>
+          <div align="right">&nbsp;</div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="columnItemContent">
+      	<img src="/content/images/img_custom.jpg" />
+        <p><b>Production Quality: </b>When images are enlarged for this format, a certain amount of film grain will result. This is normal and is not noticeable when the image is viewed at the distance from which outdoor advertising materials are intended to be seen.</p>
+        <p><b>Production Costs: </b>Because outdoor advertising sizes vary by market, we must customize the size of the billboards and bus shelters by area.  There is a small fee associated with this to cover studio time and shipping. Costs are as follows:</p>
+        <p><b>Outdoor Billboard: </b>$300 each<br />
+          <b>Bus Shelter: </b>$250 each</p>
+      </div>
+      <div class="header">&nbsp;</div>
+    </div>
+    <div class="clear"></div>
+    {literal}
+    <script>
+    function checkCustomSize()
+    {
+        if(document.getElementById('other').checked  && !document.getElementById('other_size').value)
+		{
+            alert('-Description is required');
+            return false;
+		}else if(document.getElementById('custom_size').checked  && !document.getElementById('size').value)
+        {
+            alert('-Custom size is required');
+            return false;
+        }else if(!document.getElementById('custom_size').checked && !document.getElementById('bus_shelter').checked && !document.getElementById('billboard').checked && !document.getElementById('other').checked)
+        {
+            alert('-Please select a custom size.');
+            return false;
+        }else{
+            return true;
+        }
+    }
+    </script>
+    {/literal}
+</div>

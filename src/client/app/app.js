@@ -6,7 +6,7 @@
     });
 
     function config($stateProvider, $urlRouterProvider, $logProvider, $httpProvider, $locationProvider) {
-        $locationProvider.html5Mode(true);
+
         $urlRouterProvider.otherwise('/');
         $logProvider.debugEnabled(true);
         $httpProvider.interceptors.push('httpInterceptor');
@@ -24,6 +24,7 @@
                     }
                 }
             });
+         //$locationProvider.html5Mode(true);
     }
 
     function MainCtrl($log) {
@@ -36,13 +37,16 @@
 
     angular.module('app', [
             'ui.router',
+            'swfobject',
             'home',
             'login',
             'cart',
-            'myaccount',
+            'register',
+            'my-account',
             'select-print',
             'select-broadcast',
             'select-online',
+            'select-message',
             'common.header',
             'common.footer',
             'common.services.data',

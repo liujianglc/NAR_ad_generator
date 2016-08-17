@@ -1,0 +1,99 @@
+{* CALENDAR *}
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}modules/calendar/datepickercontrol.js"></script>
+<link rel="stylesheet" type="text/css" href="{$smarty.const.THEME_COMMON_PATH}modules/calendar/datepickercontrol_custom.css" />
+{literal}
+<script type="text/javascript">
+function exportExcel()
+{
+	$('#export').val(1);
+	$('#submit').click();
+}
+</script>
+{/literal}
+
+<div id="Stat" class="contentWrapper">
+{if $nData.dateStart}
+	{assign var=dateStart value=$nData.dateStart}
+{elseif isset($nData.dateStart)}
+{else}
+    {assign var=dateStart value=$smarty.now|date_format:"%m/01/%Y"}
+{/if}
+{if $nData.dateEnd}
+    {assign var=dateEnd value=$nData.dateEnd}
+{elseif isset($nData.dateEnd)}
+{else}
+    {assign var=dateEnd value=$smarty.now}
+{/if}
+  <form method="post" id="stat-form" action="{$smarty.const.PAGE_URL}" enctype="application/x-www-form-urlencoded">
+  <div align="center">
+    <div class="header">
+      <div class="headerBg">
+        <h1 class="left">{$smarty.const.PAGE_TITLE|@strtoupper}</h1>
+        <div align="right">&nbsp;</div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div class="calendar">
+        <div class="row">
+        	<div class="col1">Start Date:&nbsp;</div>
+            <div class="col2"><input name="dateStart" type="text" id="DPC_dateStart" value="{$dateStart|date_format:"%m/%d/%Y"}" /></div>
+            <div class="clear"></div>
+		</div>
+        <div class="row">
+        	<div class="col1">End Date:&nbsp;</div>
+            <div class="col2"><input name="dateEnd" type="text" id="DPC_dateEnd" value="{$dateEnd|date_format:"%m/%d/%Y"}" /></div>
+            <div class="clear"></div>
+		</div>
+        <div class="row">
+            <div class="col1">Show By:&nbsp;</div>
+            <div class="col2">
+            <select name="type">
+	                <option value="campaign"{if $type == 'campaign'} selected="selected"{/if}>All Campaign</option>
+                    <option value="print"{if $type == 'print'} selected="selected"{/if}>Print</option>
+	                <option value="broadcast"{if $type == 'broadcast'} selected="selected"{/if}>Broadcast</option>
+	                <option value="online"{if $type == 'online'} selected="selected"{/if}>Online</option>
+
+                    <option value="company"{if $type == 'company'} selected="selected"{/if}>Print: Association</option>
+                    <option value="copy"{if $type == 'copy'} selected="selected"{/if}>Print: Copy</option>
+                    <option value="image"{if $type == 'image'} selected="selected"{/if}>Print: Image</option>
+
+                    <option value="login"{if $type == 'login'} selected="selected"{/if}>User: Login</option>
+                    <option value="assets"{if $type == 'assets'} selected="selected"{/if}>User: Download Assets</option>
+                    <option value="register"{if $type == 'register'} selected="selected"{/if}>User: Register</option>
+            </select>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="row">
+        	<div class="col1">&nbsp;</div>
+            <div class="col2">
+            	<input type="submit" class="submit" id="submit" name="submit" value="submit" />
+                <input type="hidden" name="export" value="" id="export" />
+            </div>
+            <div class="clear"></div>
+		</div>
+    </div>
+  </div>
+  </form>
+{if $result}
+  <div class="data">
+  	<div class="row darkBlueHeader">
+    	<div class="col1"><strong>{$campaignTitle}</strong></div>
+        <div class="col2">{if $link}<a href="{$link}" style="color:#fff;">Export to Excel</a>{/if}</div>
+        <div class="clear"></div>
+    </div>
+    {foreach from=$result key=title item=total}
+    <div class="row {cycle values=",lightBlueBg"}">
+    	<div class="col1">{$title}</div>
+    	<div class="col2">{$total}</div>
+        <div class="clear"></div>
+    </div>
+    {/foreach}
+{elseif $result|@count == 0 && isset($result)}
+      <div style="padding:20px;">
+      	<h1>Found 0 data.</h1>
+      </div>
+{/if}
+  </div>
+  <div class="header">&nbsp;</div>
+</div>

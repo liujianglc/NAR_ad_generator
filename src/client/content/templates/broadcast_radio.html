@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$smarty.const.SITE_NAME}{if $smarty.const.PAGE_TITLE} | {$smarty.const.PAGE_TITLE}{/if}</title>
+<meta name="keywords" content="{$smarty.const.KEYWORDS}">
+<meta name="description" content="{$smarty.const.DESCRIPTION}">
+{if $smarty.const.SITE_ICON}<link rel="shortcut icon" href="{$smarty.const.BASE_URL}{$smarty.const.SITE_ICON}">{/if}
+<link rel="stylesheet" type="text/css" href="{$smarty.const.THEME_PATH}styles/main.css" />
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}js/misc.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+{literal}
+<style>
+body{ background-color:#fff; margin:0; padding:0; }
+
+.product-essential, .product-collateral {
+    padding: 25px;
+}
+
+.product-info-box{
+	/*
+	width:900px;
+	padding:25px;
+	*/
+}
+.product-essential {
+    background: url("store/skin/frontend/default/default/images/product_essential_bg.gif") repeat-x scroll 505% 0 #FFFFFF;
+    padding: 0 25px;
+}
+.product-info-box .product-name {
+    color: #0A263C;
+    font-size: 1.8em;
+    margin-bottom: 0.3em;
+}
+.product-collateral {
+    background: url("store/skin/frontend/default/default/images/product_collateral_bg.gif") repeat-x scroll 0 0 #FAF7EE;
+}
+
+.product-essential .product-shop {
+    width: 360px;
+}
+.product-shop {
+    float: right;
+}
+.product-img-box .product-image-zoom {
+    margin-left: 25px;
+    z-index: 9;
+}
+#proddescrip {
+    clear: left;
+    float: left;
+    width: 480px;
+}
+
+.product-img-box {
+    float: left;
+    width: 100px;
+}
+
+.divider {
+    background: url("store/skin/frontend/default/default/css/../images/dotted_divider.gif") repeat-x scroll 0 0 transparent;
+    font-size: 1px;
+    height: 1px;
+    line-height: 1em;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.product-collateral .collateral-box h4 {
+    color: #E26703;
+}
+
+.product-collateral .head {
+    border-bottom: 1px solid #E5DCC3;
+    font-size: 1.15em;
+    margin-bottom: 1em;
+    padding-bottom: 1px;
+}
+.head, .inner-head {
+    line-height: 1.25em;
+    text-align: right;
+}
+.head h1, .head h2, .head h3, .head h4, .head h5, .inner-head h1, .inner-head h2, .inner-head h3, .inner-head h4, .inner-head h5 {
+    float: left;
+    color: #2E67B1;
+    font-size: 12px;
+    margin: 0;
+    padding: 7px 0;
+    text-transform: uppercase;
+}
+
+.product-options dd select {
+    width: 99%;
+}
+input.input-text, select, textarea {
+    border: 1px solid #B6B6B6;
+    font: 12px arial,helvetica,sans-serif;
+}
+input, select, button {
+    vertical-align: middle;
+}
+
+.product-options {
+    background-color: #F6F6F6;
+    border: 1px solid #E4E4E4;
+    margin: 20px 0 0;
+    padding: 10px 15px 20px;
+}
+.product-options dt label {
+    color: #2F2F2F;
+}
+label {
+    color: #666666;
+    font-weight: bold;
+}
+.product-options dd {
+    border-bottom: 1px solid #E4E4E4;
+    margin: 0 0 5px;
+    padding: 5px 10px 15px;
+}
+.product-options dl.last dd.last {
+    border-bottom: 0 none;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+}
+
+.product-shop .short-description {
+    font-style: italic;
+    margin-bottom: 10px;
+    margin-top: -5px;
+    overflow: hidden;
+    width: 100%;
+}
+
+h2 {
+    font-size: 11px;
+    margin: 16px 0;
+}
+.page-head:after, .page-head-alt:after, .page-popup .print-head:after, .clear:after, .col2-set:after, .col3-set:after, .col4-set:after, .col2-alt-set:after, .head:after, .inner-head:after, .header-top:after, .quick-access:after, .header-nav:after, #nav:after, .middle:after, .product-essential:after, .more-views ul:after, .button-set:after, .actions:after, .legend:after, .form-list li:after, .button-container:after, .ratings:after, .page-head:after, .page-head-alt:after, .group-select li:after, .search-autocomplete li:after, .tool-tip .btn-close:after, .side-col li:after, .account-box li:after, .address-list li:after, .generic-product-list li:after, .listing-type-list .listing-item:after, .listing-type-list .product-info .product-reviews:after, .my-review-detail:after, .product-options dt:after, .product-options-bottom:after, .product-options dd ul.options-list li:after, .add-to-holder:after, .listing-type-grid .grid-row:after, .advanced-search-summary-box:after, .shopping-cart-totals .checkout-types:after, .advanced-search li:after {
+    clear: both;
+    content: ".";
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    overflow: hidden;
+}
+</style>
+{/literal}
+</head>
+<body>
+<div class="product-info-box">
+
+  <div class="product-essential">
+    <div class="product-img-box">
+      <p class="product-image-zoom"> <img title="What Matters Most: 30 - Radio" alt="What Matters Most: 30 - Radio" src="http://dev.verve8media.com/ad_generator/store/media/catalog/product/cache/1/image/5e06319eda06f020e43594a9c230972d/r/a/radio_all_1_1.jpg" id="image" style="position: relative;"></p>
+    </div>
+    
+    <div class="product-shop">
+      <h3 class="product-name"> {$data.title} </h3>
+      <h2 class="short-description">Radio Spot</h2>
+      
+        <fieldset id="product-options-wrapper" class="product-options">
+          <dl class="last">
+            <dt>
+              <label class="left">Download</label>
+            </dt>
+            <dd class="last">
+              <select id="downloadFile" onchange="download();">
+                <option value="">Select a type...</option>
+                {if $data.download1}<option value="download.php?fileId={$data.broadcastId}&type=broadcast&subtype=download1">:30 Standard</option>{/if}
+                {if $data.download2}<option value="download.php?fileId={$data.broadcastId}&type=broadcast&subtype=download2">:25/:05 Custom</option>{/if}
+                {if $data.download3}<option value="download.php?fileId={$data.broadcastId}&type=broadcast&subtype=download3">:25/:35 Custom</option>{/if}
+              </select>
+            </dd>
+          </dl>
+        </fieldset>
+        {literal}
+     	<script>
+		function download()
+		{
+			var file = $('#downloadFile option:selected').val();
+			console.log(file);
+			window.location = file;
+		}
+		</script>
+        {/literal}
+    </div>
+    
+    <div id="proddescrip">
+      <div class="product-collateral">
+        <div class="collateral-box">
+          <div class="head">
+            <h4>Description</h4>
+          </div>
+          <div class="product-specs">
+            <h2 style="margin-bottom:0px;">Custom or Standard</h2>
+            Customized TV/Radio spots provide space on the end frame for local and state associations to add their own information called "tagging." The association can then coordinate with their local media station(s) to tag the spot.</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+    </div>
+    
+    <div class="clear"></div>
+  </div>
+  
+</div>
+</body>
+</html>

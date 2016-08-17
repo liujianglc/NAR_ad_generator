@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$smarty.const.SITE_NAME}{if $smarty.const.PAGE_TITLE} | {$smarty.const.PAGE_TITLE}{/if}</title>
+<meta name="keywords" content="{$smarty.const.KEYWORDS}">
+<meta name="description" content="{$smarty.const.DESCRIPTION}">
+{if $smarty.const.SITE_ICON}<link rel="shortcut icon" href="{$smarty.const.BASE_URL}{$smarty.const.SITE_ICON}">{/if}
+<link rel="stylesheet" type="text/css" href="{$smarty.const.THEME_PATH}styles/main.css" />
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}js/misc.js"></script>
+{literal}
+<style>
+body{ background-color:#fff; margin:0; padding:0; }
+</style>
+{/literal}
+</head>
+<body>
+<div id="PrintSize">
+    <div id="{$data.category}Section" style="padding-left:20px;">
+        <h1>Select the color format under the size you prefer.</h1>
+        <div class="clear"></div>
+        <div class="info">
+            <div class="txt">
+            	<div class="left txt2">Can't find the size you need?</div>
+	            <div class="left"><a href="{$smarty.const.CUSTOM_SIZE_URL}" target="_parent"><img src="/content/images/bttnCustom.png" border="0" alt="Order Custom Sizes and Outdoor Materials" id="custom" onmouseover="MM_swapImage('custom','','/content/images/bttnCustom_r.png',0)" onmouseout="MM_swapImgRestore()" /></a></div>
+			</div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+{assign var="counter" value=0}
+{foreach from=$dataList item=data}
+        <div style="float:left; padding-right:5px;">
+        <table>
+            <tr>
+                <td height="240" valign="bottom"><img src="{$smarty.const.THEME_PATH}/images/{$data.category|@strtolower}_tn.jpg" border="0" alt="Select {$data.category|@ucwords}." /></td>
+            </tr>
+            <tr>
+                <td><a href="{$smarty.const.PRINT_CUSTOM_URL}?file={$data.colorXml}" target="_parent">{$data.subcategory|@ucwords}</a></td>
+            </tr>
+            <tr>
+                <td><a href="{$smarty.const.PRINT_CUSTOM_URL}?file={$data.colorXml}" target="_parent"><img src="/content/images/bttnColor.gif" border="0" alt="Select a Color Campaign." id="color{$counter}" onmouseover="MM_swapImage('color{$counter}','','/content/images/bttnColor_r.gif',0)" onmouseout="MM_swapImgRestore()"></a></td>
+            </tr>
+            {if $data.bwXml}
+            <tr>
+                <td><a href="{$smarty.const.PRINT_CUSTOM_URL}?file={$data.bwXml}" target="_parent"><img src="/content/images/bttnBW.gif" border="0" alt="Select Black and White Campaign." id="bw{$counter}" onmouseover="MM_swapImage('bw{$counter}','','/content/images/bttnBW_r.gif',0)" onmouseout="MM_swapImgRestore()"></a></td>
+            </tr>
+            {/if}
+        </table>
+        </div>
+{assign var="counter" value=$counter+1}
+{/foreach}
+    </div>
+    <div class="disclaimer">*Thumbnail images not to scale</div>
+</div>
+</body>
+</html>

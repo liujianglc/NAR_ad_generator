@@ -1,0 +1,113 @@
+{* FLEXBOX *}
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}modules/flexbox/js/jquery.flexbox.min_vs.js"></script>
+<link rel="stylesheet" type="text/css" href="{$smarty.const.THEME_COMMON_PATH}modules/flexbox/css/jquery.flexbox.css" />
+
+<div id="UserInfo">
+    <div class="header">
+        <div class="headerBg">
+            <h1>{$smarty.const.PAGE_TITLE}</h1>
+        </div>
+    </div>
+    <div class="padding">
+{if $register}
+        <div class="register">
+            <h2>Create your own NAR Ad Generator account.</h2>
+            <p>All users of the new NAR Ad Generator website need to register for access. You will need your NRDS Identification number which you can get from the link below. Once you submit this form you will be sent a confirmation email with your password included. Use your password and your registered email address to login and start creating your Public Awareness Campaign materials today. Please fill in all fields.</p>
+        </div>
+{/if}
+{if $data.status == -1}
+        <div class="approveUser"><strong>Please Approve User:</strong><br />
+        <label><input type="radio" name="approveUser" value="approve" {if $data.status == 0}checked="checked"{/if} /> Approve</label>
+        <label><input type="radio" name="approveUser" value="decline" {if $data.status == 1}checked="checked"{/if} /> Decline</label></div>
+{/if}    
+{* allow user to select associate *}
+{if $allowAssociate}
+        <br />
+        <div style="padding-bottom:3px; position:relative; left:-5px;">*Required fields</div>
+        Association Name:<br />
+    {*
+        <select name="groupId" id="groupId">
+    {foreach from=$groupList item=groupData}
+        {if $groupData.company != ''}
+           <option value="{$groupData.groupId}" {if $data.groupId == $groupData.groupId}selected="selected"{elseif !isset($data.groupId)}selected="selected"{/if} title="{$groupData.company}">{$groupData.company}</option>
+        {/if}
+    {/foreach}
+        </select>
+    *}
+		<div id="groupId"></div>
+        <input type="hidden" name="associate" id="associate" value="{$data.groupId}" />
+        <input type="hidden" name="associateName" id="associateName" value="{$data.groupCompany}" />
+        <br />
+		<br />
+    {literal}
+		<script type="text/javascript">   	
+            $().ready(function() 
+			{  
+				var flexBox = $('#groupId').flexbox('data_associates.php', 
+				{
+					resultTemplate: '<div>{name}</div><div>{city}, {state}</div>',
+					paging: {  
+						pageSize: 5  
+					},
+					maxCacheBytes:0,
+					onSelect: function() 
+					{
+						var data = $(this).data('data');
+						
+						$('#associate').val(data.id);
+						$('#associateName').val(this.value);
+						
+						//alert(data.city + " "+ data.state);
+						$("#address").html(data.address);
+						$("#city").html(data.city);
+						$("#state").html(data.state);
+						$("#zip").html(data.zip);
+						$("#phone").html(data.phone);
+						$("#association-info").slideDown();
+					}, 
+	{/literal}
+					initialValue:'{$data.groupCompany}',
+	{literal}
+					highlightMatches:false
+				});
+				
+				$('#groupId_input').blur(function()
+				{
+					if(this.value == "")
+					{
+						$('#associate').val('');
+						$('#associateName').val('');
+					}
+				});				
+			}); 	
+        </script>  
+    {/literal}
+{else}
+	{* allow user to only view the assocaite *}
+    	<h2>Associate Name:<br />
+        <span>{$data.groupCompany}</span></h2>
+{/if}   
+{if $allowRealtorId}
+        <p>NRDS ID: <br />
+        <input name="NRDS_ID" id="NRDS_ID" type="text" class="contactWidth" value="{$data.realtorId}" style="width:98%;" /><br />
+        Forgot your NRDS ID? <a href="https://secure.realtor.org/nrdslogi.nsf/LoginUserInfo" target="_blank">Click here</a></p>
+{else}
+       	<h2>NRDS ID: <br />
+        <span>{$data.realtorId}</span></h2>
+{/if}
+        <p>First Name: *<br />
+        <input name="first_name" id="first_name" type="text" value="{$data.first}" style="width:98%;" /></p>
+        <p>Last Name: *<br />
+        <input name="last_name" id="last_name" type="text" value="{$data.last}" style="width:98%;" /></p>
+        <p> Email: * <br />
+        <input name="email" id="email" type="text" value="{$data.email}" style="width:98%;" /></p>
+{if $allowPassword}
+        <p>Password: * <br />
+        <input name="password" id="password" type="password" value="" style="width:98%;" /></p>
+        <p>Verify Password: * <br />
+        <input name="password2" id="password2" type="password" value="" style="width:98%;" />
+        </p>
+{/if}
+    </div>
+    <div class="header">&nbsp;</div>
+</div>

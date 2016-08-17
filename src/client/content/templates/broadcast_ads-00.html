@@ -1,0 +1,137 @@
+{* CODA SLIDER *}
+<link rel="stylesheet" type="text/css" href="{$smarty.const.THEME_COMMON_PATH}modules/coda-slider/coda-slider-2.0.css" />
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}modules/coda-slider/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}modules/coda-slider/jquery.coda-slider-2.0.js"></script>
+{literal}
+<style>
+.coda-slider, .coda-slider .panel{ width:616px; }
+.coda-slider, .coda-slider .panel { height:150px; }
+</style>
+{/literal}
+<div id="Broadcast">
+    <div class="header">
+      <div class="headerBg3">
+        <div class="left">
+            <h1>Broadcast TV and Radio:<span> Simply click below to preview TV and radio spots, then choose one and hit &ldquo;ADD TO CART&rdquo;.</span></h1>
+        </div>
+        <div align="right">&nbsp;</div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div id="dropDown">
+    	<select onchange="MM_jumpMenu('parent',this,0)">
+{foreach from=$campaignList item=campaign}
+        	<option value="{$smarty.const.PAGE_URL}?campaignId={$campaign.campaignId}"{if $campaign.campaignId == $campaignId} selected="selected"{/if}>{$campaign.campaignShortTitle}</option>
+{/foreach}
+        </select>
+        <span>&nbsp;&nbsp;&nbsp;Need a Different Message? Pull down for a jumplink.</span>
+    </div>
+{assign var="maxItemPerPanel" value=4}
+{assign var=campaignTotal value=1}
+{assign var=allCampaign value=0}
+{foreach from=$data key=dataKey item=dataItem}
+	{* NEW CATEGORY *}
+    {*if $allCampaign > 0}<div style="margin:10px 0 15px 0;"><hr /></div>{/if*}
+    <div id="section{$dataKey}" {if $campaignTotal > 1}{/if}>
+    {assign var=lastCampaignKey value=''}
+    {foreach from=$dataItem key=campaignKey item=campaignList}
+        {* SET CAMPAIGN TITLE *}
+    	{if $campaignKey != $lastCampaignKey}
+        <div class="header">
+            <div class="headerBg">
+              <h1 class="left">{$dataKey|@strtoupper}: <span>{$campaignList[0].campaignShortTitle} Message</span></h1>
+              <div align="right"></div>
+              <div class="clear"></div>
+            </div>
+        </div>        
+        {/if}
+        
+        {* START SLIDER *}
+    	<div class="broadcastRow">
+            <div class="coda-slider-wrapper">
+                <div id="coda-nav-left-{$campaignTotal}" class="leftBttn">
+        {* SHOW PREVIOUS BTTN WHEN CAMPAIGN TOTAL IS MORE THAN MAXITEM *}
+        {if $campaignList|@count > $maxItemPerPanel}
+	                <a href="#null" title="Slide left"><img src="templates/ad_generator/images/bttnLeft.png" alt="previous" border="0" /></a>
+        {/if}
+                </div>
+                <div class="coda-slider preload" id="coda-slider-{$campaignTotal}">
+		{assign var=campaignCount value=0}
+		{foreach from=$campaignList item=campaign}
+        	{assign var=campaignMax value=$campaignList|@count}
+            {* START PANEL FOR SLIDER *}
+            {if $campaignCount % $maxItemPerPanel == 0}
+            	{if $campaignCount > 0}
+                    	</div>
+                	</div>
+				{/if}
+                    <div class="panel">
+                        <div class="panel-wrapper">
+			{/if}
+            {* START ITEM *}
+                            <div class="item">
+            {if $dataKey == 'radio'}
+                                <div class="img audioImg" style="background: no-repeat url({if $campaign.thumbnail}{$campaign.thumbnail}{else}/content/images/no_audio.gif{/if});">
+                                	<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+                                    	<tr>
+                                        	<td valign="middle"><a href="{$smarty.const.PREVIEW_URL}?audio={$campaign.media}" class="lightBoxAudio" title="{$campaign.title} - {$campaign.category}">{$campaign.title}</a></td>
+                                        </tr>
+                                    </table>
+                        		</div>
+                                <div align="center"><a href="{$smarty.const.PREVIEW_URL}?audio={$campaign.media}" class="lightBoxAudio" title="{$campaign.title} - {$campaign.category}"><img src="/content/images/bttnPreview.gif" id="preview{$allCampaign}" border="0" onmouseover="MM_swapImage('preview{$allCampaign}','','/content/images/bttnPreview_r.gif',0)" onmouseout="MM_swapImgRestore()" alt="preview" /></a><a href="{$smarty.const.BROADCAST_RADIO_URL}?broadcastId={$campaign.broadcastId}" class="lightBoxAudioDownload"><img src="/content/images/bttnDownload2.gif" id="cart{$allCampaign}" alt="Download" border="0" onmouseover="MM_swapImage('cart{$allCampaign}','','/content/images/bttnDownload2_r.gif',0)" onmouseout="MM_swapImgRestore()" /></a></div>
+                                <div align="center" style="padding-top:2px;">{*$campaignCount} {$campaignMax} | *}</div>
+                                {*$campaign.link*}
+            {else}
+                                <div class="img"><a href="{$smarty.const.PREVIEW_URL}?video={$campaign.media}" class="lightBoxVideo{if $campaign.mediaWidth && $campaign.mediaHeight}-{$campaign.broadcastId}{/if}" title="{$campaign.title} - {$campaign.category}"><img src="{if $campaign.thumbnail}{$campaign.thumbnail}{else}/content/images/no_video.gif{/if}" border="0" /></a></div>
+                                <div align="center"><a href="{$smarty.const.PREVIEW_URL}?video={$campaign.media}" class="lightBoxVideo{if $campaign.mediaWidth && $campaign.mediaHeight}-{$campaign.broadcastId}{/if}" title="{$campaign.title} - {$campaign.category}"><img src="/content/images/bttnPreview.gif" id="preview{$allCampaign}" border="0" onmouseover="MM_swapImage('preview{$allCampaign}','','/content/images/bttnPreview_r.gif',0)" onmouseout="MM_swapImgRestore()" alt="preview" /></a><a href="{$campaign.link}" class="lightBoxAddToCartREMOVE"><img src="/content/images/bttnAddtoCart.gif" id="cart{$allCampaign}" alt="add to cart" border="0" onmouseover="MM_swapImage('cart{$allCampaign}','','/content/images/bttnAddtoCart_r.gif',0)" onmouseout="MM_swapImgRestore()" /></a></div>
+                                <div align="center" style="padding-top:2px;">{if $campaign.download1}<a href="download.php?fileId={$campaign.broadcastId}&type=broadcast" title="Download Low-res: {$campaign.title} - {$campaign.category}"><img src="/content/images/bttnDownloadLowRes.gif" id="download{$allCampaign}" border="0" onmouseover="MM_swapImage('download{$allCampaign}','','/content/images/bttnDownloadLowRes_r.gif',0)" onmouseout="MM_swapImgRestore()" alt="Download Low-res" /></a>{else}&nbsp;{/if}</div>
+                                <div align="center" style="padding-top:2px;">{$campaign.title}</div>
+                {if $campaign.mediaWidth && $campaign.mediaHeight}
+                	{literal}
+                                <script>
+									$(".lightBoxVideo{/literal}-{$campaign.broadcastId}{literal}").colorbox({iframe:true, innerWidth:{/literal}{$campaign.mediaWidth}{literal}, innerHeight:{/literal}{$campaign.mediaHeight}{literal}});
+								</script>
+					{/literal}
+                {/if}
+            {/if}
+                            </div>
+            {* END ITEM *}
+            {if $campaignCount == $campaignMax-1}
+                    	</div>
+                	</div>
+			{/if}
+            {* END PANEL FOR SLIDER *}
+            {assign var=campaignCount value=$campaignCount+1}
+            {assign var=allCampaign value=$allCampaign+1}
+		{/foreach}
+                </div><!-- .coda-slider -->
+                
+		{* SHOW NEXT BTTN WHEN CAMPAIGN TOTAL IS MORE THAN MAXITEM *}
+                <div id="coda-nav-right-{$campaignTotal}" class="rightBttn">
+    	{if $campaignList|@count > $maxItemPerPanel}
+                    <a href="#null" title="Slide right"><img src="templates/ad_generator/images/bttnRight.png" alt="next" border="0" /></a>
+		{/if}
+                </div>
+            </div><!-- .coda-slider-wrapper -->
+            
+            
+		{literal}
+			<script type="text/javascript">
+            $().ready(function() {
+		{/literal}
+                $('#coda-slider-{$campaignTotal}'){literal}.codaSlider({
+                       dynamicArrows: false,
+                       dynamicTabs: false
+                });
+            });			
+            </script>            
+		{/literal}
+        
+        
+    	</div>
+        {assign var=lastCampaignKey value=$campaignKey}
+        {assign var=campaignTotal value=$campaignTotal+1}
+	{/foreach}
+	</div>
+{/foreach}
+</div>

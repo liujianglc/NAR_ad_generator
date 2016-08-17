@@ -1,0 +1,97 @@
+<div id="User">
+{include file="`$smarty.const.THEME_COMMON`status.html"}
+{if $approveData|@count > 0}
+    <div id="Approve">
+        <div class="header">
+          <div class="headerBg">
+            <h1 class="left">Users Pending Approval</h1>
+            <div align="right">&nbsp;</div>
+            <div class="clear"></div>
+          </div>
+        </div>
+        <div class="data">
+            <div class="darkBlueHeader row">
+                <div class="col1"><strong>Name</strong></div>
+                <div class="col2"><strong>Associate</strong></div>
+                <div class="col3"><strong>NRDS ID</strong></div>
+                <div class="col4"><strong>Created</strong></div>
+                <div class="col5">&nbsp;</div>
+                <div class="clear"></div>
+            </div>
+	{foreach from=$approveData item=approveUser }
+            <form action="{$smarty.const.PAGE_URL}" method="post" enctype="multipart/form-data">
+              <div class="row {cycle values=",lightBlueBg"}">
+                  <div class="col1"><a href="{$smarty.const.PAGE_URL}?userId={$approveUser.userId}">{$approveUser.first} {$approveUser.last}</a></div>
+                  <div class="col2">{$approveUser.groupCompany}</div>
+                  <div class="col3">{$approveUser.realtorId}</div>
+                  <div class="col4">
+                    {$approveUser.created}
+                    <input type="hidden" name="userId" value="{$approveUser.userId}" />
+                    <input type="hidden" name="first_name" value="{$approveUser.first}" />
+                    <input type="hidden" name="last_name" value="{$approveUser.last}" />
+                    <input type="hidden" name="email" value="{$approveUser.email}" />
+                    <input type="hidden" name="funct" value="save" />
+                  </div>
+                  <div class="col5"><input type="submit" name="approveUser" value="approve" /> <input type="submit" name="approveUser" value="decline" /></div>
+                  <div class="clear"></div>
+              </div>
+            </form>
+	{/foreach}
+		</div>
+        <div class="header">&nbsp;</div>
+    </div>
+{/if}
+{if !$data.userId}
+	<div id="AllUsers">
+        <div class="header">
+          <div class="headerBg">
+            <h1 class="left">Search Users </h1>
+            <div align="right">&nbsp;</div>
+            <div class="clear"></div>
+          </div>
+        </div>
+        <div class="data">
+        Enter User Name:<br />
+	{include file="`$smarty.const.THEME_URL`search.html"}
+        </div>
+    {*if $userData|@count > 0}
+    	<div class="data">
+            <div class="darkBlueHeader row">
+                <div class="col1"><strong>Name</strong></div>
+                <div class="col2"><strong>Associate</strong></div>
+                <div class="col3"><strong>NRDS ID</strong></div>
+                <div class="col4"><strong>Created</strong></div>
+                <div class="col5"><strong>Modified</strong></div>
+                <div class="col6"><strong>&nbsp;</strong></div>
+                <div class="clear"></div>
+            </div>
+        {foreach from=$userData item=userItem }
+            <div class="row {cycle values=",lightBlueBg"}">
+                <div class="col1"><a href="{$smarty.const.PAGE_URL}?userId={$userItem.userId}">{$userItem.first} {$userItem.last}</a></div>
+                <div class="col2">{$userItem.groupCompany}</div>
+                <div class="col3">{$userItem.realtorId}&nbsp;</div>
+                <div class="col4">{$userItem.created}</div>
+                <div class="col5">{$userItem.modified}&nbsp;</div>
+                <div class="col6"><input type="button" name="funct" value="edit" onclick="window.location='{$smarty.const.PAGE_URL}?userId={$userItem.userId}'" /></div>
+                <div class="clear"></div>
+            </div>
+        {/foreach}
+        </div>
+    {else}
+        <div>
+            <p>Sorry no available users.</p>
+        </div>
+    {/if*}
+        <div class="header">&nbsp;</div>
+    </div>
+{else}
+<form method="post" enctype="multipart/form-data" action="{$smarty.const.CURRENT_URL}">
+    <div id="Register">
+{include file="`$smarty.const.THEME_URL`user_info.html"}
+{include file="`$smarty.const.THEME_URL`user_address.html"}
+	    <div class="clear"></div>
+    </div>
+</form>
+
+{/if}
+</div>

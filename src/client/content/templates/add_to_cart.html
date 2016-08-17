@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$smarty.const.SITE_NAME}{if $smarty.const.PAGE_TITLE} | {$smarty.const.PAGE_TITLE}{/if}</title>
+<meta name="keywords" content="{$smarty.const.KEYWORDS}">
+<meta name="description" content="{$smarty.const.DESCRIPTION}">
+{if $smarty.const.SITE_ICON}<link rel="shortcut icon" href="{$smarty.const.BASE_URL}{$smarty.const.SITE_ICON}">{/if}
+<link rel="stylesheet" type="text/css" href="{$smarty.const.THEME_COMMON_PATH}styles/main.css" />
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}js/misc.js"></script>
+<script type="text/javascript" src="{$smarty.const.THEME_COMMON_PATH}js/AC_RunActiveContent.js"></script>
+{literal}
+<script>
+function calculatePrice()
+{
+	var quantityId 		= document.getElementById('quantity');
+	var quantity 		= Number(quantityId.value);
+	
+	var mediaFormatId 	= document.getElementById('media_format');
+	var mediaSelect 	= mediaFormatId.selectedIndex;
+	var mediaValue		= mediaFormatId.options[mediaSelect].value;
+	mediaValue = mediaValue.split("_");
+	mediaValue = Number(mediaValue[1]);
+	
+	var totalId 		= document.getElementById('grandTotal');
+	totalId.innerHTML = "$" + String(Number(quantity*mediaValue)) + ".00";
+}
+</script>
+<style>
+body{ margin:0; padding:0; }
+</style>
+{/literal}
+</head>
+<body onload="calculatePrice();">
+{if $data}
+<div class="addToCartItem" style="width:500px;">
+	<div>{$data.title}</div>
+    <div>
+        <div style="float:left; width:200px;"><img src="{if $data.thumbnail}{$data.thumbnail}{else}{$smarty.const.BASE_URL}{if $data.category == 'radio'}files/images/no_audio.gif{else}files/images/no_video.gif{/if}{/if}" /></div>
+        <div style="float:right; width:300px;">
+{foreach from=$productOptions key=productKey item=productOption}
+	<div class="{$productKey}">
+    {$productOptions[$productKey].title}<br />
+	{if $productOptions[$productKey].drop_down}
+    	<select name="{$productKey}" id="{$productKey}" onchange="calculatePrice();" onblur="calculatePrice();">
+    	{foreach from=$productOptions[$productKey].drop_down key=productOptionTitle item=productOptionItem}
+        	<option value="{$productOptionTitle|@strtolower}_{$productOptionItem}">{$productOptionTitle}{if $productOptionTitle|@strtolower == 'vhs' || $productOptionTitle|@strtolower == 'dvd'} (not for broadcast){/if} - ${$productOptionItem}</option>
+		{/foreach}
+        </select>
+    {elseif $productOptions[$productKey].radio}
+    	{foreach from=$productOptions[$productKey].radio key=productOptionTitle item=productOptionItem}
+    		<label><input name="{$productKey}" type="radio" value="{$productOptionTitle}" {if $productOptionTitle|@strtolower == 'yes'}checked{/if}> {$productOptionTitle}</label><br />
+        {/foreach}
+    {/if}
+    </div>
+{/foreach}
+            <div>
+            	Quantity<br />
+                <input name="quantity" id="quantity" value="1" onkeyup="calculatePrice();" onblur="calculatePrice();" />
+            </div>
+            <div>
+            	<p>&nbsp;</p>
+                <div>Total Price: </div>
+                <div id="grandTotal"></div>
+                <div><a href="#">ADD TO CART >></a></div>
+            </div>
+		</div>
+        <div class="clear"></div>
+    </div>
+</div>
+{else}
+<div> Invalid product.</div>
+{/if}
+</body>
+</html>
